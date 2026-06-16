@@ -1,0 +1,74 @@
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Allow the deploy job to publish to GitHub Pages.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history so the secret scan can see all commits
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Build, lint, format, and run the spec
+        run: pnpm check
+      - name: Check internal links
+        run: pnpm dlx linkinator ./dist --silent
+      - name: Scan for committed secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: --only-verified
+
+  deploy:
+    needs: check
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true # turn Pages on automatically for freshly generated repos
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+      - id: deploy
+        uses: actions/deploy-pages@v4
+      - name: Verify the deployed site is online
+        run: |
+          url="${{ steps.deploy.outputs.page_url }}"
+          for i in 1 2 3 4 5; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$url" || true)
+            if [ "$code" = "200" ]; then echo "online: $url"; exit 0; fi
+            echo "attempt $i: HTTP $code, retrying in 10s..."
+            sleep 10
+          done
+          echo "site did not return 200"; exit 1
