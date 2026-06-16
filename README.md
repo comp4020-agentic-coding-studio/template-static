@@ -4,6 +4,13 @@ A starter template for static-site prototypes in **COMP4020 / COMP8020 Agentic
 Coding Studio**. Click **Use this template** to create your own repo, build your
 prototype, and deploy it to GitHub Pages.
 
+## First time: turn on Pages
+
+GitHub Pages isn't enabled automatically on a new repo. Once, after you create
+yours: **Settings → Pages → Build and deployment → Source → GitHub Actions.**
+After that, every push to `main` builds and deploys, and the deploy step prints
+your live URL and checks it returns 200.
+
 ## Quick start
 
 ```sh

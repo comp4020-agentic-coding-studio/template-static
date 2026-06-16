@@ -55,8 +55,6 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true # turn Pages on automatically for freshly generated repos
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
