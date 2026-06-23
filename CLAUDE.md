@@ -13,8 +13,10 @@ first.
 ## How to work in here
 
 - Keep the dev server running (`pnpm dev`) so you see changes as you make them.
-- Before you push, run `pnpm check`. It runs the same checks CI does, so you
-  catch problems in seconds instead of waiting for the pipeline.
+- Before you push, run `pnpm check`. It runs most of what CI runs --- build,
+  lint, format, and the spec --- so you catch those in seconds instead of
+  waiting for the pipeline. The links, secrets, and deploy checks only run in
+  CI.
 - To see what the page actually looks like rather than what you assume it looks
   like, open it with `agent-browser`. The rendered page is the truth; your
   mental model of it isn't.
