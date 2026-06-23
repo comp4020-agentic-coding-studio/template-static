@@ -56,6 +56,31 @@ Two more sensors --- **accessibility** (`axe-core`) and **performance**
 green performance result honestly: it's a lab estimate from one run on a CI
 machine, not proof the site is fast for real users.
 
+## Your process is part of the mark
+
+The deployed page is only half of it. How you got there is marked too: your
+commit history, your agent files, and the decisions visible across them. The
+checks above can't see any of that, so a person reads it directly --- which
+means building legibly is part of building well.
+
+- **Commit as you go.** Small, frequent commits are the record of how the work
+  came together, and that record is read, not just the final state. A trail that
+  grew alongside the code is the strongest evidence of your process; a single
+  dump the night before is the weakest.
+- **Keep a process overview** (`OVERVIEW.md`, or a clearly-marked section of
+  your `README.md`). A short reading-guide, not an essay: what you built, which
+  decisions mattered, and where to look in the history. It points a marker at
+  the evidence; it doesn't stand in for it.
+- **Publish your weekly reflection at `/reflections/`** --- a page on the
+  deployed site about the developer you're becoming and the breakthrough that
+  moved the work forward. It's the written half of your crit contribution.
+- **This file is process evidence.** The harness you build to direct the agent,
+  this `CLAUDE.md` and any `AGENTS.md`, is itself read as part of how you
+  worked. Keep it honest and current (see below).
+
+You don't need a name, a student number, or any identity file in the repo: we
+know whose repo it is. Spend the effort on the work.
+
 ## This file is yours
 
 This CLAUDE.md is a starting point, not a fixed rulebook. As you learn what your
