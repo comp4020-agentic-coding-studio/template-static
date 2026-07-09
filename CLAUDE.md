@@ -71,9 +71,11 @@ means building legibly is part of building well.
   your `README.md`). A short reading-guide, not an essay: what you built, which
   decisions mattered, and where to look in the history. It points a marker at
   the evidence; it doesn't stand in for it.
-- **Publish your weekly reflection at `/reflections/`** --- a page on the
-  deployed site about the developer you're becoming and the breakthrough that
-  moved the work forward. It's the written half of your crit contribution.
+- **Write your weekly reflection in `reflections/`** --- a short markdown file
+  in this repo, one per week, answering the two standing prompts: what this
+  week's work changed about the developer you want to be, and the aha moment
+  that moved the work forward. It stays out of the deployed site. It's due at
+  the cutoff, and it's the written half of your crit contribution.
 - **This file is process evidence.** The harness you build to direct the agent,
   this `CLAUDE.md` and any `AGENTS.md`, is itself read as part of how you
   worked. Keep it honest and current (see below).
