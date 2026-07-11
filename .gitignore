@@ -2,3 +2,8 @@ node_modules/
 dist/
 .DS_Store
 *.log
+
+# keep secrets out of the repo: your API key lives in an env var or an
+# untracked file, never in a tracked one
+.env
+.env.*
