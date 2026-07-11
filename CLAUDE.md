@@ -49,7 +49,10 @@ can't reliably see by looking at it.
 - **links** --- internal links must resolve. A broken link is a dead end you
   didn't mean to ship.
 - **secrets** --- the repo is scanned for committed credentials. Never put a
-  key, token, or password in a tracked file. If one leaks, rotate it.
+  key, token, or password in a tracked file. If one leaks, rotate it. A local
+  pre-commit hook (`.githooks/pre-commit`, installed by `pnpm install`) also
+  blocks any commit containing something shaped like an API key --- by the time
+  CI sees a key it's already pushed, so the hook is the sensor that matters.
 
 Two more sensors --- **accessibility** (`axe-core`) and **performance**
 (Lighthouse) --- arrive in week 6, when we cover them. When they do, read a

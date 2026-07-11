@@ -29,6 +29,9 @@ pnpm build      # produce dist/ (what gets deployed)
   work here. Yours to grow.
 - `.github/workflows/checks.yml` --- the CI sensors that run on every push, and
   the GitHub Pages deploy.
+- `.githooks/pre-commit` --- blocks any commit that contains something shaped
+  like an API key, so your COMP4020 key can't end up in a public repo. Installed
+  automatically by `pnpm install`.
 
 This template is SSG-agnostic: it's plain HTML/CSS/JS on Vite, so you can add
 Astro, Eleventy, or any static generator later without changing how it deploys.
