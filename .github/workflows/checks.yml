@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   pull_request:
+  # /ship dispatches a run after flipping the repo public, since the
+  # visibility flip itself triggers no push event.
+  workflow_dispatch:
 
 # Allow the deploy job to publish to GitHub Pages.
 concurrency:
@@ -12,7 +15,13 @@ concurrency:
 
 jobs:
   check:
+    # Jobs only run once the repo is public: private-phase pushes would drain
+    # the org's shared free Actions pool, and `pnpm check` runs the same
+    # sensors locally while you build (public repos get unlimited minutes, so
+    # cost ends at the flip).
+    if: ${{ !github.event.repository.private }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
     steps:
@@ -36,8 +45,11 @@ jobs:
 
   deploy:
     needs: check
-    if: github.ref == 'refs/heads/main'
+    # Pages can't serve a private repo on the free org anyway; the visibility
+    # condition keeps a private-phase run from failing confusingly here.
+    if: ${{ !github.event.repository.private && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
       pages: write

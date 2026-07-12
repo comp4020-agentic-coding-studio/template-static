@@ -29,9 +29,11 @@ first.
 
 ## The checks (your sensors)
 
-CI runs these on every push and reports each one separately. They aren't hoops.
-Each is a different way of finding out something true about the site that you
-can't reliably see by looking at it.
+CI runs these on every push once your repo is public, reporting each one
+separately. While the repo is private (all week, until you ship) the CI jobs
+stay skipped --- `pnpm check` is the same roster on your machine, and it's the
+faster loop anyway. They aren't hoops. Each is a different way of finding out
+something true about the site that you can't reliably see by looking at it.
 
 - **build** --- the site must build (`pnpm build`). A build failure means the
   deployed site is broken or stale, so nothing else matters until this is green.
