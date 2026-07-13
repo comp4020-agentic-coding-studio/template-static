@@ -3,8 +3,9 @@
 This is your starter repo for a COMP4020 prototype: a static site that builds to
 plain HTML/CSS/JS and deploys to GitHub Pages. The **deployed site is what gets
 marked** --- not this repo, and not "it works on my machine". It's marked live
-in Chrome at 1920×1080 against the deployed URL, so make that artefact good and
-use the checks below to know whether it is.
+in Chrome against the deployed URL at two viewports --- 1920×1080 (desktop) and
+390×844 (phone) --- and both count in full, so make that artefact good at both
+and use the checks below to know whether it is.
 
 What you're building this week is in `spec/README.md` (the brief), and
 `spec/spec.test.js` checks the contracts that brief promises. Read the brief
