@@ -2,7 +2,7 @@
 
 <!-- TEMPLATE: this file is a shape to fill in, not a form. Replace everything
      in it with your own overview, and delete this comment — `pnpm
-     check:process` will remind you if it's still here. -->
+     check:evidence` will remind you if it's still here. -->
 
 A reading-guide to how the work came together --- a map to your process, not an
 essay about it. Markers read this file and follow its citations; they don't
@@ -34,5 +34,5 @@ full transcript) next to the citation:
 
 > the prompt, verbatim
 
-`pnpm check:process` verifies your citations resolve to real commits before you
+`pnpm check:evidence` verifies your citations resolve to real commits before you
 ship.

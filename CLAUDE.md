@@ -86,7 +86,7 @@ means building legibly is part of building well.
   stand in for it, and claims the history doesn't back don't count. The
   `PROCESS.md` in this repo is a template showing the shape and the citation
   format (link text the commit hash or range, target the commit or compare URL);
-  `pnpm check:process` verifies your citations resolve to real commits before
+  `pnpm check:evidence` verifies your citations resolve to real commits before
   you ship. Markers follow those citations and don't trawl the repo for evidence
   you didn't cite.
 - **Write your weekly reflection in `reflections/`** --- a short markdown file

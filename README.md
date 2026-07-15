@@ -28,7 +28,7 @@ pnpm build      # produce dist/ (what gets deployed)
 - `CLAUDE.md` --- orients your coding agent: what the checks mean and how to
   work here. Yours to grow.
 - `PROCESS.md` --- a template for your process overview, showing the
-  cited-moment format. Replace it with your own; `pnpm check:process` verifies
+  cited-moment format. Replace it with your own; `pnpm check:evidence` verifies
   your citations resolve.
 - `.github/workflows/checks.yml` --- the CI sensors that run on every push, and
   the GitHub Pages deploy.

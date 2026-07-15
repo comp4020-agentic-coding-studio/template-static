@@ -40,7 +40,7 @@ jobs:
         # skipped in the template repo itself, where PROCESS.md is still the
         # boilerplate every student replaces
         if: ${{ !github.event.repository.is_template }}
-        run: pnpm check:process
+        run: pnpm check:evidence
       - name: Check internal links
         run: pnpm dlx linkinator ./dist --silent
       - name: Scan for committed secrets
