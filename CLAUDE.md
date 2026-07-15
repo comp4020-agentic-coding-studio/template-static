@@ -7,9 +7,12 @@ in Chrome against the deployed URL at two viewports --- 1920×1080 (desktop) and
 390×844 (phone) --- and both count in full, so make that artefact good at both
 and use the checks below to know whether it is.
 
-What you're building this week is in `spec/README.md` (the brief), and
-`spec/spec.test.js` checks the contracts that brief promises. Read the brief
-first.
+What you're building this week — the spec — is published on the course website,
+and this repo's name tells you which deliverable it is. Run the course plugin's
+**new-week** skill at the start of each week: it pulls the right spec from the
+course API, carries your harness forward from last week, and helps you turn the
+spec's checkable lines into tests of your own. Read the spec before you build,
+and see `spec/README.md` for how the checks in this repo relate to it.
 
 ## How to work in here
 
@@ -41,8 +44,10 @@ something true about the site that you can't reliably see by looking at it.
 - **deploy / online** --- the live GitHub Pages URL must load and return the
   page you expect. An asset that 404s on the deployed URL counts as broken even
   if it loads locally.
-- **spec** --- `spec/spec.test.js` checks the contracts in this week's brief. A
-  failure names the contract you haven't met yet.
+- **spec** --- `spec/invariants.test.js` asserts what's true of any good
+  website, whatever the week's brief asks; the tests you write for the week's
+  own spec run alongside it (any `spec/*.test.js`). A failure names the contract
+  you haven't met yet.
 - **lint** --- `stylelint` for CSS, `oxlint` for JS. Flags code that's wrong,
   fragile, or non-idiomatic. Read the rule it names.
 - **format** --- `oxfmt` keeps the code consistently formatted. Cosmetic, but it
@@ -57,10 +62,11 @@ something true about the site that you can't reliably see by looking at it.
   blocks any commit containing something shaped like an API key --- by the time
   CI sees a key it's already pushed, so the hook is the sensor that matters.
 
-Two more sensors --- **accessibility** (`axe-core`) and **performance**
-(Lighthouse) --- arrive in week 6, when we cover them. When they do, read a
-green performance result honestly: it's a lab estimate from one run on a CI
-machine, not proof the site is fast for real users.
+Nothing here measures **accessibility** or **performance** --- wiring those
+sensors (`axe-core`, Lighthouse, or whatever you choose) is your work, and later
+in the course the spec will ask you to show how you tested both. When you do,
+read a green performance result honestly: it's a lab estimate from one run on a
+CI machine, not proof the site is fast for real users.
 
 ## Your process is part of the mark
 
