@@ -72,7 +72,7 @@ means building legibly is part of building well.
   came together, and that record is read, not just the final state. A trail that
   grew alongside the code is the strongest evidence of your process; a single
   dump the night before is the weakest.
-- **Keep a process overview** (`OVERVIEW.md`). A short reading-guide, not an
+- **Keep a process overview** (`PROCESS.md`). A short reading-guide, not an
   essay: what you built, the moments that mattered --- each pointing at a
   commit, a `CLAUDE.md` change, or a prompt and the commit it produced --- and
   where to look in the history. It points a marker at the evidence; it doesn't
