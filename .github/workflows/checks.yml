@@ -36,6 +36,11 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Build, lint, format, and run the spec
         run: pnpm check
+      - name: Check the process evidence
+        # skipped in the template repo itself, where PROCESS.md is still the
+        # boilerplate every student replaces
+        if: ${{ !github.event.repository.is_template }}
+        run: pnpm check:process
       - name: Check internal links
         run: pnpm dlx linkinator ./dist --silent
       - name: Scan for committed secrets
