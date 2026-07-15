@@ -76,7 +76,12 @@ means building legibly is part of building well.
   essay: what you built, the moments that mattered --- each pointing at a
   commit, a `CLAUDE.md` change, or a prompt and the commit it produced --- and
   where to look in the history. It points a marker at the evidence; it doesn't
-  stand in for it, and claims the history doesn't back don't count.
+  stand in for it, and claims the history doesn't back don't count. The
+  `PROCESS.md` in this repo is a template showing the shape and the citation
+  format (link text the commit hash or range, target the commit or compare URL);
+  `pnpm check:process` verifies your citations resolve to real commits before
+  you ship. Markers follow those citations and don't trawl the repo for evidence
+  you didn't cite.
 - **Write your weekly reflection in `reflections/`** --- a short markdown file
   in this repo, one per week, answering the two standing prompts: what this
   week's work changed about the developer you want to be, and the aha moment

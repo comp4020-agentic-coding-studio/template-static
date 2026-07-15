@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "pnpm build && oxlint --ignore-path .gitignore && stylelint \"**/*.css\" --ignore-path .gitignore --allow-empty-input && oxfmt --check . && vitest run",
+    "check:process": "node scripts/check-process.ts",
     "test": "vitest run"
   },
   "devDependencies": {
