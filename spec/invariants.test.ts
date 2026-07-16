@@ -6,10 +6,10 @@ import { describe, expect, it } from "vitest";
 // The invariants run against the BUILT site, so they check what actually
 // ships, not the source. Run `pnpm build` first (the `check` script does).
 // These hold for any good website, whatever the week's brief asks — the
-// week-specific contracts live in your own spec/*.test.js alongside this file.
+// week-specific contracts live in your own spec/*.test.ts alongside this file.
 const DIST = resolve("dist");
 
-function htmlFiles(dir = DIST) {
+function htmlFiles(dir: string = DIST): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const path = join(dir, entry.name);
     if (entry.isDirectory()) return htmlFiles(path);
@@ -69,6 +69,6 @@ describe("invariants: home page", () => {
   });
 
   it("has the required intro hook", () => {
-    expect(home.doc.querySelector('[data-testid="intro"]')).toBeTruthy();
+    expect(home?.doc.querySelector('[data-testid="intro"]')).toBeTruthy();
   });
 });

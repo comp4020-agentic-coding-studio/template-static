@@ -1,11 +1,12 @@
 # COMP4020 prototype
 
-This is your starter repo for a COMP4020 prototype: a static site that builds to
-plain HTML/CSS/JS and deploys to GitHub Pages. The **deployed site is what gets
-marked** --- not this repo, and not "it works on my machine". It's marked live
-in Chrome against the deployed URL at two viewports --- 1920×1080 (desktop) and
-390×844 (phone) --- and both count in full, so make that artefact good at both
-and use the checks below to know whether it is.
+This is your starter repo for a COMP4020 prototype: a static site written in
+HTML/CSS/TypeScript that builds to plain HTML/CSS/JS and deploys to GitHub
+Pages. The **deployed site is what gets marked** --- not this repo, and not "it
+works on my machine". It's marked live in Chrome against the deployed URL at two
+viewports --- 1920×1080 (desktop) and 390×844 (phone) --- and both count in
+full, so make that artefact good at both and use the checks below to know
+whether it is.
 
 What you're building this week — the spec — is published on the course website,
 and this repo's name tells you which deliverable it is. Run the course plugin's
@@ -44,12 +45,12 @@ something true about the site that you can't reliably see by looking at it.
 - **deploy / online** --- the live GitHub Pages URL must load and return the
   page you expect. An asset that 404s on the deployed URL counts as broken even
   if it loads locally.
-- **spec** --- `spec/invariants.test.js` asserts what's true of any good
+- **spec** --- `spec/invariants.test.ts` asserts what's true of any good
   website, whatever the week's brief asks; the tests you write for the week's
-  own spec run alongside it (any `spec/*.test.js`). A failure names the contract
+  own spec run alongside it (any `spec/*.test.ts`). A failure names the contract
   you haven't met yet.
-- **lint** --- `stylelint` for CSS, `oxlint` for JS. Flags code that's wrong,
-  fragile, or non-idiomatic. Read the rule it names.
+- **lint** --- `stylelint` for CSS, `oxlint` for TypeScript. Flags code that's
+  wrong, fragile, or non-idiomatic. Read the rule it names.
 - **format** --- `oxfmt` keeps the code consistently formatted. Cosmetic, but it
   keeps diffs honest.
 - **tests** --- any tests you write must pass. A failing test is a claim about

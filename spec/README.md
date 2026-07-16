@@ -10,7 +10,7 @@ The checks in this directory come in two kinds:
 
 ## Invariants (shipped, always on)
 
-`invariants.test.js` asserts things that are true of any good website, however
+`invariants.test.ts` asserts things that are true of any good website, however
 you build it and whatever the week's brief asks: a navigation landmark, exactly
 one top-level heading, the marked intro region (`data-testid="intro"`), a
 document language, a real title, a mobile viewport, alt text on images. They run
@@ -21,7 +21,7 @@ them green; don't delete them.
 
 Turning the week's published spec into tests is your work, not the template's.
 Some spec lines are mechanically checkable — assert those here, in your own test
-file alongside the invariants (any `spec/*.test.js` runs with `pnpm check`).
+file alongside the invariants (any `spec/*.test.ts` runs with `pnpm check`).
 Some lines only a person can judge; leave those to the crit. Write tests for the
 **contracts** — what the page must do, not how you built it — so the tests
 survive a change of approach, or of stack.

@@ -22,9 +22,9 @@ pnpm build      # produce dist/ (what gets deployed)
 
 ## What's here
 
-- `index.html`, `styles.css`, `main.js` --- a minimal starting site. Replace it.
-- `spec/` --- the brief (`README.md`) and the conformance test (`spec.test.js`)
-  for this instance. The brief is what you're building; the test checks it.
+- `index.html`, `styles.css`, `main.ts` --- a minimal starting site. Replace it.
+- `spec/` --- what the checks are for (`README.md`) and the shipped invariants
+  (`invariants.test.ts`); your own spec tests live alongside them.
 - `CLAUDE.md` --- orients your coding agent: what the checks mean and how to
   work here. Yours to grow.
 - `PROCESS.md` --- a template for your process overview, showing the
@@ -36,7 +36,9 @@ pnpm build      # produce dist/ (what gets deployed)
   like an API key, so your COMP4020 key can't end up in a public repo. Installed
   automatically by `pnpm install`.
 
-This template is SSG-agnostic: it's plain HTML/CSS/JS on Vite, so you can add
-Astro, Eleventy, or any static generator later without changing how it deploys.
+This template is SSG-agnostic: it's plain HTML/CSS/TypeScript on Vite, so you
+can add Astro, Eleventy, or any static generator later without changing how it
+deploys. TypeScript is the course default over plain JavaScript: the types are
+extra backpressure, and your agent feels it before you do.
 
 See the course site for how the checks map to each week of the course.
