@@ -16,7 +16,7 @@ your live URL and checks it returns 200.
 ```sh
 pnpm install
 pnpm dev        # local dev server
-pnpm check      # run the same checks CI runs
+pnpm check      # most of what CI runs (links, secrets and deploy are CI-only)
 pnpm build      # produce dist/ (what gets deployed)
 ```
 
