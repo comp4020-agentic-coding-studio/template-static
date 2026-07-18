@@ -1,6 +1,6 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join, relative, resolve } from "node:path";
-import { parseHTML } from "linkedom";
+import { JSDOM } from "jsdom";
 import { describe, expect, it } from "vitest";
 
 // The invariants run against the BUILT site, so they check what actually
@@ -19,7 +19,7 @@ function htmlFiles(dir: string = DIST): string[] {
 
 const pages = htmlFiles().map((path) => ({
   name: relative(DIST, path),
-  doc: parseHTML(readFileSync(path, "utf8")).document,
+  doc: new JSDOM(readFileSync(path, "utf8")).window.document,
 }));
 
 describe("invariants: every page", () => {
