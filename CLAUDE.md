@@ -20,10 +20,15 @@ and see `spec/README.md` for how the checks in this repo relate to it.
 - Keep the dev server running (`pnpm dev`) so you see changes as you make them.
 - Before you push, run `pnpm check`. It runs most of what CI runs --- build,
   lint, and the spec --- so you catch those in seconds instead of waiting for
-  the pipeline. The links, secrets, and deploy checks only run in CI.
+  the pipeline. The links check, the evidence check, the secrets scan, and the
+  deploy itself only run in CI; run `pnpm dlx linkinator ./dist --silent`
+  locally against a fresh `pnpm build` for the links check without waiting for
+  CI.
 - To see what the page actually looks like rather than what you assume it looks
-  like, open it with `agent-browser`. The rendered page is the truth; your
-  mental model of it isn't.
+  like, open it in a browser (the `agent-browser` CLI, documented on
+  [the course site](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/backpressure/#agent-browser-the-rendered-page-as-ground-truth),
+  works well for this). The rendered page is the truth; your mental model of it
+  isn't.
 - When a check fails, read its output before changing anything. Each check below
   names what it measures, and the failure message is the instruction: it tells
   you the file, the line, or the contract. Treat a red check as authoritative
@@ -33,11 +38,15 @@ and see `spec/README.md` for how the checks in this repo relate to it.
 
 ## The checks (your sensors)
 
-CI runs these on every push once your repo is public, reporting each one
-separately. While the repo is private (all week, until you ship) the CI jobs
-stay skipped --- `pnpm check` is the same roster on your machine, and it's the
-faster loop anyway. They aren't hoops. Each is a different way of finding out
-something true about the site that you can't reliably see by looking at it.
+CI runs these on every push once your repo is public. GitHub's checks UI shows
+two jobs, `check` and `deploy` --- not one status per sensor below --- and
+within `check` the steps run in sequence (`pnpm check` chains build, lint, and
+the spec with `&&`), so an early failure like a broken build stops the later
+sensors from running for that push; fix it and push again to see the rest. While
+the repo is private (all week, until you ship) the CI jobs stay skipped ---
+`pnpm check` is the same roster on your machine, and it's the faster loop
+anyway. They aren't hoops. Each is a different way of finding out something true
+about the site that you can't reliably see by looking at it.
 
 - **build** --- the site must build (`pnpm build`). A build failure means the
   deployed site is broken or stale, so nothing else matters until this is green.
@@ -50,8 +59,19 @@ something true about the site that you can't reliably see by looking at it.
   you haven't met yet.
 - **lint** --- `stylelint` for CSS, `oxlint` for TypeScript. Flags code that's
   wrong, fragile, or non-idiomatic. Read the rule it names.
-- **tests** --- any tests you write must pass. A failing test is a claim about
-  the site that's no longer true.
+- **tests** --- any other tests you write, wherever you put them (co-located
+  with your source is fine, not just `spec/`), must pass. Vitest picks up both
+  this and the spec suite in one `vitest run`, the last step of `pnpm check`. A
+  failing test is a claim about the site that's no longer true.
+- **evidence** (`pnpm check:evidence`) --- checks your process evidence:
+  `PROCESS.md`'s citations resolve to real commits, a reflection entry exists in
+  `reflections/`, and `CLAUDE.md` is present. It gates the deploy --- `deploy`
+  needs `check` to pass, so failing evidence blocks the deploy alongside
+  everything else. See
+  [Your process is part of the mark](#your-process-is-part-of-the-mark) below,
+  and the course website's
+  [assessment page](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#what-you-submit)
+  for what counts as evidence.
 - **links** --- internal links must resolve. A broken link is a dead end you
   didn't mean to ship.
 - **secrets** --- the repo is scanned for committed credentials. Never put a
