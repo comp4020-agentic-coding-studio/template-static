@@ -1,23 +1,35 @@
 # COMP4020 static prototype template
 
 A starter template for static-site prototypes in **COMP4020 / COMP8020 Agentic
-Coding Studio**. Click **Use this template** to create your own repo, build your
-prototype, and deploy it to GitHub Pages.
+Coding Studio**. The course provisions a repo from this template for each
+deliverable --- you don't create it yourself. The `new-week` course skill clones
+it for you; from there, build your prototype and deploy it to GitHub Pages.
 
-## First time: turn on Pages
+## CI and Pages only turn on when you ship
 
-GitHub Pages isn't enabled automatically on a new repo. Once, after you create
-yours: **Settings → Pages → Build and deployment → Source → GitHub Actions.**
-After that, every push to `main` builds and deploys, and the deploy step prints
-your live URL and checks it returns 200.
+Your repo starts private, and both CI jobs (`check` and `deploy`) are gated on
+it being public. While private, a push to `main` runs nothing in CI ---
+`pnpm check` (below) is your feedback loop until then. When you're ready, the
+course's `/ship` skill flips the repo public, turns on GitHub Pages, and
+dispatches the deploy for you; there's nothing to configure in the Pages
+settings yourself. From that point, every push to `main` builds and deploys, and
+the deploy step prints your live URL and checks it returns 200.
+
+## What gets marked
+
+The deployed site is the deliverable, assessed live in Chrome at two fixed
+viewports --- see the course website's
+[assessment page](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#marking-environment)
+for the details.
 
 ## Quick start
 
 ```sh
 pnpm install
 pnpm dev        # local dev server
-pnpm check      # most of what CI runs (links, secrets and deploy are CI-only)
+pnpm check      # most of what CI runs (links, secrets, evidence and deploy are CI-only)
 pnpm build      # produce dist/ (what gets deployed)
+pnpm dlx linkinator ./dist --silent   # the links check, locally --- what CI runs pre-push
 ```
 
 ## What's here
@@ -30,8 +42,8 @@ pnpm build      # produce dist/ (what gets deployed)
 - `PROCESS.md` --- a template for your process overview, showing the
   cited-moment format. Replace it with your own; `pnpm check:evidence` verifies
   your citations resolve.
-- `.github/workflows/checks.yml` --- the CI sensors that run on every push, and
-  the GitHub Pages deploy.
+- `.github/workflows/checks.yml` --- the CI sensors that run on every push once
+  your repo is public, and the GitHub Pages deploy.
 - `.githooks/pre-commit` --- blocks any commit that contains something shaped
   like an API key, so your COMP4020 key can't end up in a public repo. Installed
   automatically by `pnpm install`.
