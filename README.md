@@ -25,6 +25,7 @@ for the details.
 ## Quick start
 
 ```sh
+mise install       # supported path: install the template's Node and pnpm
 pnpm install
 pnpm dev        # local dev server
 pnpm check      # most of what CI runs (links, secrets, evidence and deploy are CI-only)
@@ -32,9 +33,15 @@ pnpm build      # produce dist/ (what gets deployed)
 pnpm dlx linkinator ./dist --silent   # the links check, locally --- what CI runs pre-push
 ```
 
+`mise` is the course's recommended runtime manager. If you use another manager
+or the official installers, that is fine: provide the Node and pnpm versions in
+`mise.toml`, then run the same commands. Tutor support reproduces runtime
+problems with mise.
+
 ## What's here
 
 - `index.html`, `styles.css`, `main.ts` --- a minimal starting site. Replace it.
+- `mise.toml` --- the tested Node and pnpm versions for this template.
 - `spec/` --- what the checks are for (`README.md`) and the shipped invariants
   (`invariants.test.ts`); your own spec tests live alongside them.
 - `CLAUDE.md` --- orients your coding agent: what the checks mean and how to
