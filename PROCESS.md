@@ -68,3 +68,6 @@ the four jobs in one paragraph, not to be imitated in content.
 
 `pnpm check:evidence` verifies your citations resolve to real commits and your
 relative image paths exist, before a marker ever opens the file.
+It checks that your map is traceable, not that it is good: the marker judges
+whether your small, deliberately chosen set of moments shows real judgement and
+reflection. A green check is not a substitute for that curation.
