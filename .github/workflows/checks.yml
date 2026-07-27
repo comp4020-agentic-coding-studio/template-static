@@ -47,6 +47,18 @@ jobs:
         uses: trufflesecurity/trufflehog@main
         with:
           extra_args: --only-verified
+      - name: Scan for a committed course key
+        # The scan above reports only secrets it can confirm are live, and a
+        # course key has no verifier a runner can reach --- see
+        # .github/trufflehog.yml, which matches its shape instead.
+        # CustomRegex scopes this pass to that file's detector, so the built-in
+        # ones don't add unverified noise on top of it.
+        uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: >-
+            --config=.github/trufflehog.yml
+            --include-detectors=CustomRegex --results=unverified
+            --no-verification
 
   deploy:
     needs: check
