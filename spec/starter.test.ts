@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { JSDOM } from "jsdom";
 import { describe, expect, it } from "vitest";
@@ -7,10 +7,14 @@ import { describe, expect, it } from "vitest";
 // implementation so there is a concrete example to replace with tests for the
 // week's published spec.
 describe("starter page", () => {
-  const doc = new JSDOM(readFileSync(resolve("dist/index.html"), "utf8")).window
-    .document;
-
   it("marks the intro region used by the starter script", () => {
+    const distPath = resolve("dist/index.html");
+    expect(
+      existsSync(distPath),
+      `${distPath} not found. If you've restructured away from dist/index.html, replace or delete this starter test.`,
+    ).toBe(true);
+
+    const doc = new JSDOM(readFileSync(distPath, "utf8")).window.document;
     expect(doc.querySelector('[data-testid="intro"]')).toBeTruthy();
   });
 });

@@ -6,7 +6,7 @@ this repo's name tells you which one applies: the course API maps repo prefixes
 to deliverables, and the `new-week` course skill walks your agent through
 pulling the right one. Read the spec on the site first; it's the contract.
 
-The checks in this directory come in two kinds:
+The checks in this directory come in three kinds:
 
 ## Invariants (shipped, always on)
 
@@ -16,10 +16,12 @@ one top-level heading, a document language, a real title, a mobile viewport, and
 alt text on images. They run against the **built** site (`dist/`), so they check
 what actually ships. Keep them green; don't delete them.
 
-`starter.test.ts` is different: it checks the starter page's intro hook to show
-the shape of a page-specific contract. Replace or delete that test when you
-replace the starter page. A starter implementation detail is not a universal
-invariant.
+## A worked example (yours to replace)
+
+`starter.test.ts` shows the shape of a spec test: it checks the starter page's
+intro hook. It's a worked example, not part of the always-on contract — replace
+or delete it when you replace the starter page. A starter implementation detail
+is not a universal invariant.
 
 ## Your spec tests (yours to write)
 

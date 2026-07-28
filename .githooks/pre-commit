@@ -5,7 +5,10 @@
 
 pattern='sk-[A-Za-z0-9_-]{20,}'
 
-hits=$(git grep --cached -nE "$pattern" | cut -d: -f1,2)
+# Real keys are random base64url and always contain uppercase; this second
+# grep stage spares lowercase kebab-case identifiers (CSS classes, slugs)
+# that also match the shape.
+hits=$(git grep --cached -noE "$pattern" | grep -E ':[A-Za-z0-9_-]*[A-Z][A-Za-z0-9_-]*$' | cut -d: -f1,2)
 
 if [ -n "$hits" ]; then
 	echo "commit blocked: something staged looks like an API key" >&2
