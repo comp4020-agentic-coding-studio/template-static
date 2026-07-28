@@ -64,10 +64,13 @@ about the site that you can't reliably see by looking at it.
   this and the spec suite in one `vitest run`, the last step of `pnpm check`. A
   failing test is a claim about the site that's no longer true.
 - **evidence** (`pnpm check:evidence`) --- checks your process evidence:
-  `PROCESS.md`'s citations resolve to real commits, a correctly named reflection
-  entry is in `reflections/`, and `CLAUDE.md` is present. It gates the deploy
-  --- `deploy` needs `check` to pass, so failing evidence blocks the deploy
-  alongside everything else. See
+  `PROCESS.md`'s citations resolve to real commits, the exact current reflection
+  named by `.comp4020/deliverable.json` is in `reflections/`, and a
+  working-method file is present (`CLAUDE.md`/`AGENTS.md`, or `WORKING.md` for
+  the no-AI route). The `new-week` course skill refreshes that tracked cache
+  from the public course API. Evidence gates the deploy --- `deploy` needs
+  `check` to pass, so failing evidence blocks the deploy alongside everything
+  else. See
   [Your process is part of the mark](#your-process-is-part-of-the-mark) below,
   and the course website's
   [assessment page](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#what-you-submit)
@@ -130,10 +133,12 @@ means building legibly is part of building well.
   repo, named for the deliverable it answers, so the number in the filename is
   the number in this repo's name (`crit-1.md` in `comp4020-crit1-<you>`,
   `assignment-1.md` in `comp4020-ass1-<you>`); `reflections/README.md` has the
-  full rule. It answers the two standing prompts: what this work changed about
-  the developer you want to be, and the aha moment that moved the work forward.
-  It stays out of the deployed site. It's due at the cutoff, and it's the
-  written half of your crit contribution.
+  full rule. `pnpm check:evidence` checks the exact current name recorded by
+  `new-week`, not merely the presence of any well-named file. It answers the two
+  standing prompts: what this work changed about the developer you want to be,
+  and the aha moment that moved the work forward. It stays out of the deployed
+  site. It's due at the cutoff, and it's the written half of your crit
+  contribution.
 - **This file is process evidence.** The harness you build to direct the agent,
   this `CLAUDE.md` and any `AGENTS.md`, is itself read as part of how you
   worked. Keep it honest and current (see below).

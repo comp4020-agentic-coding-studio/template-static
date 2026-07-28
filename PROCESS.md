@@ -22,20 +22,21 @@ One paragraph: the thing, and the idea behind it.
 Three or four for an assignment; fewer is fine for a weekly prototype. Keep the
 list short so each moment has room to do all four jobs:
 
-1. **what happened** --- the problem, or the thing the agent got wrong
+1. **what happened** --- the problem, or the thing the first attempt got wrong
 2. **what you did instead of the obvious thing** --- the call you made, and why
    it beat the obvious one
 3. **how you knew it was right** --- the check you ran, the viewport you looked
    at, what you read before accepting the diff
-4. **the citation** --- a commit or commit range, a `CLAUDE.md` change, a check
-   that went from red to green, a prompt paired with the commit it produced
+4. **the citation** --- a commit or commit range, a working-instructions
+   change, a check that went from red to green, or a prompt paired with the
+   commit it produced
 
 Jobs 2 and 3 are the ones the repo can't tell a reader on its own, so they're
 where the marks are. The strongest moments are the ones where a correction
-landed in the **harness** rather than in another prompt --- a rule added to
-`CLAUDE.md`, a check wired up, an attempt thrown away: re-prompting until it
-passes is the routine case, and changing what the agent works against is the
-skilled one.
+changed the **working method** rather than merely patching the output --- a rule
+added to `CLAUDE.md`, `AGENTS.md` or `WORKING.md`, a check wired up, an attempt
+thrown away. Changing the feedback loop is the skilled case, whether the next
+implementation is generated or hand-written.
 
 Cite each moment as a link whose text is the commit hash or range and whose
 target is this repo's commit or compare URL, so a reader clicks straight to the
@@ -72,9 +73,10 @@ the four jobs in one paragraph, not to be imitated in content.
 
 ## Before you ship
 
-`pnpm check:evidence` verifies your citations resolve to real commits, that a
-correctly named reflection entry is in `reflections/`, and that your `CLAUDE.md`
-is there --- before a marker ever opens the file. It checks that your map is
+`pnpm check:evidence` verifies your citations resolve to real commits, that the
+current reflection entry is in `reflections/`, and that the repo carries
+working-method instructions (`CLAUDE.md`/`AGENTS.md`, or `WORKING.md` for the
+no-AI route) --- before a marker ever opens the file. It checks that your map is
 traceable, not that it is good: the marker judges whether your small,
 deliberately chosen set of moments shows real judgement and reflection. A green
 check is not a substitute for that curation.

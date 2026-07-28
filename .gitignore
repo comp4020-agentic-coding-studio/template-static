@@ -7,3 +7,4 @@ dist/
 # untracked file, never in a tracked one
 .env
 .env.*
+.claude/settings.local.json

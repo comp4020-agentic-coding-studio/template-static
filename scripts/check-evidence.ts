@@ -2,8 +2,8 @@
 // Checks the process evidence every submission carries: PROCESS.md with its
 // template boilerplate gone, every cited commit hash resolving to a real
 // commit in this repo (a citation is a markdown link whose text is an
-// abbreviated SHA or a sha...sha range), a correctly named reflection entry in
-// reflections/, and the CLAUDE.md harness. Bare minimum, on purpose.
+// abbreviated SHA or a sha...sha range), the current deliverable's exact
+// reflection entry, and working-method instructions. Bare minimum, on purpose.
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 
@@ -13,32 +13,81 @@ const fail = (msg: string): void => {
   failed = true;
 };
 
-if (!existsSync("CLAUDE.md")) {
-  fail("no CLAUDE.md in the repo root — the harness is part of every submission");
+const workingFiles = ["CLAUDE.md", "AGENTS.md", "WORKING.md"].filter((path) => existsSync(path));
+if (workingFiles.length === 0) {
+  fail(
+    "no working-method file in the repo root — keep CLAUDE.md/AGENTS.md for agentic work, or WORKING.md for the no-AI route",
+  );
 }
 
-// A reflection is named for the deliverable it answers, so the number in the
-// filename is the number in the repo name: crit-1.md in comp4020-crit1-<you>,
-// assignment-1.md in comp4020-ass1-<you>. The marker reads that exact name.
 const REFLECTION_NAME = /^(crit-\d+|assignment-\d+|final-project)\.md$/;
+
+type Deliverable = {
+  kind: "crit" | "assessment";
+  slug: string;
+  repoPrefix: string;
+  reflection: string;
+};
 
 const reflections = existsSync("reflections")
   ? readdirSync("reflections").filter((f) => f.endsWith(".md") && f !== "README.md")
   : [];
-const named = reflections.filter((f) => REFLECTION_NAME.test(f));
 const misnamed = reflections.filter((f) => !REFLECTION_NAME.test(f));
-if (named.length === 0) {
+let deliverable: Deliverable | undefined;
+if (!existsSync(".comp4020/deliverable.json")) {
   fail(
-    `no reflection entry in reflections/${misnamed.length > 0 ? ` — ${misnamed.join(", ")} ${misnamed.length === 1 ? "is not a name" : "are not names"} the marker reads` : ""}. ` +
-      "Name it for the deliverable it answers: crit-<n>.md, assignment-<n>.md, " +
-      "or final-project.md, so the number matches the one in your repo's name.",
+    "no .comp4020/deliverable.json — rerun /comp4020:new-week so this repo records the current published deliverable",
   );
 } else {
-  console.log(`✓ reflections/: ${named.length} entr${named.length === 1 ? "y" : "ies"}`);
-  // Anything else in there is just clutter — the named entry is what's read.
-  for (const f of misnamed) {
-    console.warn(`! reflections/${f} isn't a name the marker reads, so it won't be marked`);
+  try {
+    const parsed = JSON.parse(
+      readFileSync(".comp4020/deliverable.json", "utf8"),
+    ) as Partial<Deliverable>;
+    if (
+      !["crit", "assessment"].includes(parsed.kind ?? "") ||
+      typeof parsed.slug !== "string" ||
+      typeof parsed.repoPrefix !== "string" ||
+      !parsed.repoPrefix.startsWith("comp4020-") ||
+      typeof parsed.reflection !== "string" ||
+      !REFLECTION_NAME.test(parsed.reflection)
+    ) {
+      throw new Error("invalid fields");
+    }
+    deliverable = parsed as Deliverable;
+  } catch {
+    fail(
+      ".comp4020/deliverable.json is invalid — rerun /comp4020:new-week rather than editing the cache by hand",
+    );
   }
+}
+
+if (deliverable) {
+  if (!reflections.includes(deliverable.reflection)) {
+    fail(
+      `current reflection is missing — the marker reads reflections/${deliverable.reflection} for ${deliverable.slug}`,
+    );
+  } else {
+    console.log(`✓ reflections/${deliverable.reflection}: current deliverable entry`);
+  }
+
+  try {
+    const origin = execFileSync("git", ["config", "--get", "remote.origin.url"], {
+      encoding: "utf8",
+    }).trim();
+    const repoName = origin
+      .replace(/\.git$/, "")
+      .split(/[/:]/)
+      .at(-1);
+    if (repoName && !repoName.startsWith(`${deliverable.repoPrefix}-`)) {
+      fail(`.comp4020/deliverable.json names ${deliverable.repoPrefix}, but origin is ${repoName}`);
+    }
+  } catch {
+    fail("cannot read remote.origin.url to verify the deliverable cache");
+  }
+}
+
+for (const f of misnamed) {
+  console.warn(`! reflections/${f} isn't a name the marker reads, so it won't be marked`);
 }
 
 if (!existsSync("PROCESS.md")) {

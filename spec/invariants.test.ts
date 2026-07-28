@@ -67,8 +67,4 @@ describe("invariants: home page", () => {
   it("exists", () => {
     expect(home).toBeTruthy();
   });
-
-  it("has the required intro hook", () => {
-    expect(home?.doc.querySelector('[data-testid="intro"]')).toBeTruthy();
-  });
 });

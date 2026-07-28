@@ -1,6 +1,6 @@
 # A custom TruffleHog detector for your COMP4020 proxy key.
 #
-# The key is an ordinary LiteLLM virtual key --- "sk-" followed by 22 url-safe
+# The key is an ordinary LiteLLM virtual key --- "sk-" followed by at least 20 url-safe
 # characters --- so no built-in detector recognises it, and the verified-only
 # scan in checks.yml would never report one. It cannot be verified from CI
 # either: the proxy's /api/ endpoints answer only to ANU network addresses, and
@@ -15,7 +15,7 @@ detectors:
     keywords:
       - sk-
     regex:
-      key: '\bsk-[A-Za-z0-9_-]{22}\b'
+      key: '\bsk-[A-Za-z0-9_-]{20,}\b'
     # Anthropic's own keys are far longer and have a built-in detector, which
     # the verified scan already runs.
     excludeRegexesMatch:
