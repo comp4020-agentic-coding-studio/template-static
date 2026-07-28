@@ -40,14 +40,18 @@ and see `spec/README.md` for how the checks in this repo relate to it.
 
 CI runs these on every push once your repo is public. GitHub's checks UI shows
 two jobs, `check` and `deploy` --- not one status per sensor below --- and
-within `check` the steps run in sequence (`pnpm check` chains build, lint, and
-the spec with `&&`), so an early failure like a broken build stops the later
-sensors from running for that push; fix it and push again to see the rest. While
-the repo is private (all week, until you ship) the CI jobs stay skipped ---
-`pnpm check` is the same roster on your machine, and it's the faster loop
+within `check` the steps run in sequence (`pnpm check` chains typecheck, build,
+lint, and the spec with `&&`), so an early failure like a broken build stops the
+later sensors from running for that push; fix it and push again to see the rest.
+While the repo is private (all week, until you ship) the CI jobs stay skipped
+--- `pnpm check` is the same roster on your machine, and it's the faster loop
 anyway. They aren't hoops. Each is a different way of finding out something true
 about the site that you can't reliably see by looking at it.
 
+- **typecheck** --- `tsc --noEmit` runs first in `pnpm check`, so a type error
+  stops the roster before the build even starts. The types are extra
+  backpressure: a red here is the compiler telling you a claim in the code is
+  false.
 - **build** --- the site must build (`pnpm build`). A build failure means the
   deployed site is broken or stale, so nothing else matters until this is green.
 - **deploy / online** --- the live GitHub Pages URL must load and return the
