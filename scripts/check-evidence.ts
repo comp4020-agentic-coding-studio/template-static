@@ -25,21 +25,20 @@ const REFLECTION_NAME = /^(crit-\d+|assignment-\d+|final-project)\.md$/;
 const reflections = existsSync("reflections")
   ? readdirSync("reflections").filter((f) => f.endsWith(".md") && f !== "README.md")
   : [];
+const named = reflections.filter((f) => REFLECTION_NAME.test(f));
 const misnamed = reflections.filter((f) => !REFLECTION_NAME.test(f));
-if (reflections.length === 0) {
+if (named.length === 0) {
   fail(
-    "no reflection entry in reflections/ — one per deliverable, named for it (e.g. crit-1.md)",
-  );
-} else if (misnamed.length > 0) {
-  fail(
-    `reflections/${misnamed.join(", reflections/")} — name each entry for the ` +
-      "deliverable it answers: crit-<n>.md, assignment-<n>.md, or final-project.md. " +
-      "The marker reads that exact name, so anything else reads as no reflection at all.",
+    `no reflection entry in reflections/${misnamed.length > 0 ? ` — ${misnamed.join(", ")} ${misnamed.length === 1 ? "is not a name" : "are not names"} the marker reads` : ""}. ` +
+      "Name it for the deliverable it answers: crit-<n>.md, assignment-<n>.md, " +
+      "or final-project.md, so the number matches the one in your repo's name.",
   );
 } else {
-  console.log(
-    `✓ reflections/: ${reflections.length} entr${reflections.length === 1 ? "y" : "ies"}`,
-  );
+  console.log(`✓ reflections/: ${named.length} entr${named.length === 1 ? "y" : "ies"}`);
+  // Anything else in there is just clutter — the named entry is what's read.
+  for (const f of misnamed) {
+    console.warn(`! reflections/${f} isn't a name the marker reads, so it won't be marked`);
+  }
 }
 
 if (!existsSync("PROCESS.md")) {
