@@ -18,11 +18,25 @@ if (!existsSync("CLAUDE.md")) {
   fail("no CLAUDE.md in the repo root — the harness is part of every submission");
 }
 
+// A reflection is named for the deliverable it answers, so the number in the
+// filename is the number in the repo name: crit-1.md in comp4020-crit1-<you>,
+// assignment-1.md in comp4020-ass1-<you>. The marker reads that exact name.
+const REFLECTION_NAME = /^(crit-\d+|assignment-\d+|final-project)\.md$/;
+
 const reflections = existsSync("reflections")
   ? readdirSync("reflections").filter((f) => f.endsWith(".md") && f !== "README.md")
   : [];
+const misnamed = reflections.filter((f) => !REFLECTION_NAME.test(f));
 if (reflections.length === 0) {
-  fail("no reflection entry in reflections/ — one short markdown file per week");
+  fail(
+    "no reflection entry in reflections/ — one per deliverable, named for it (e.g. crit-1.md)",
+  );
+} else if (misnamed.length > 0) {
+  fail(
+    `reflections/${misnamed.join(", reflections/")} — name each entry for the ` +
+      "deliverable it answers: crit-<n>.md, assignment-<n>.md, or final-project.md. " +
+      "The marker reads that exact name, so anything else reads as no reflection at all.",
+  );
 } else {
   console.log(
     `✓ reflections/: ${reflections.length} entr${reflections.length === 1 ? "y" : "ies"}`,
