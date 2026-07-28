@@ -64,10 +64,10 @@ about the site that you can't reliably see by looking at it.
   this and the spec suite in one `vitest run`, the last step of `pnpm check`. A
   failing test is a claim about the site that's no longer true.
 - **evidence** (`pnpm check:evidence`) --- checks your process evidence:
-  `PROCESS.md`'s citations resolve to real commits, a reflection entry exists in
-  `reflections/`, and `CLAUDE.md` is present. It gates the deploy --- `deploy`
-  needs `check` to pass, so failing evidence blocks the deploy alongside
-  everything else. See
+  `PROCESS.md`'s citations resolve to real commits, a correctly named reflection
+  entry is in `reflections/`, and `CLAUDE.md` is present. It gates the deploy
+  --- `deploy` needs `check` to pass, so failing evidence blocks the deploy
+  alongside everything else. See
   [Your process is part of the mark](#your-process-is-part-of-the-mark) below,
   and the course website's
   [assessment page](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#what-you-submit)
