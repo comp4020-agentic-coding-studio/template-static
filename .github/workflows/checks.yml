@@ -44,8 +44,13 @@ jobs:
       - name: Check internal links
         run: pnpm dlx linkinator ./dist --silent
       - name: Scan for committed secrets
-        uses: trufflesecurity/trufflehog@main
+        # Pinned, both halves: the SHA fixes the action's script, and `version`
+        # fixes the scanner image, which otherwise floats on :latest. These two
+        # steps run in every repo in the course, so an upstream change would
+        # break the whole cohort's CI in the same hour. Bump between semesters.
+        uses: trufflesecurity/trufflehog@6f3c981e7b77f235fd2702dd74af25fc4b72bf11 # v3.96.0
         with:
+          version: "3.96.0"
           extra_args: --only-verified
       - name: Scan for a committed course key
         # The scan above reports only secrets it can confirm are live, and a
@@ -53,8 +58,9 @@ jobs:
         # .github/trufflehog.yml, which matches its shape instead.
         # CustomRegex scopes this pass to that file's detector, so the built-in
         # ones don't add unverified noise on top of it.
-        uses: trufflesecurity/trufflehog@main
+        uses: trufflesecurity/trufflehog@6f3c981e7b77f235fd2702dd74af25fc4b72bf11 # v3.96.0
         with:
+          version: "3.96.0"
           extra_args: >-
             --config=.github/trufflehog.yml
             --include-detectors=CustomRegex --results=unverified
