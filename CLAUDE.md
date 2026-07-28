@@ -65,10 +65,9 @@ about the site that you can't reliably see by looking at it.
   failing test is a claim about the site that's no longer true.
 - **evidence** (`pnpm check:evidence`) --- checks your process evidence:
   `PROCESS.md`'s citations resolve to real commits, the exact current reflection
-  named by `.comp4020/deliverable.json` is in `reflections/`, and a
-  working-method file is present (`CLAUDE.md`/`AGENTS.md`, or `WORKING.md` for
-  the no-AI route). The `new-week` course skill refreshes that tracked cache
-  from the public course API. Evidence gates the deploy --- `deploy` needs
+  named by `.comp4020/deliverable.json` is in `reflections/`, and your
+  `CLAUDE.md` is present. The `new-week` course skill refreshes that tracked
+  cache from the public course API. Evidence gates the deploy --- `deploy` needs
   `check` to pass, so failing evidence blocks the deploy alongside everything
   else. See
   [Your process is part of the mark](#your-process-is-part-of-the-mark) below,

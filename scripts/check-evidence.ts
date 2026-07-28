@@ -13,11 +13,8 @@ const fail = (msg: string): void => {
   failed = true;
 };
 
-const workingFiles = ["CLAUDE.md", "AGENTS.md", "WORKING.md"].filter((path) => existsSync(path));
-if (workingFiles.length === 0) {
-  fail(
-    "no working-method file in the repo root — keep CLAUDE.md/AGENTS.md for agentic work, or WORKING.md for the no-AI route",
-  );
+if (!existsSync("CLAUDE.md")) {
+  fail("no CLAUDE.md in the repo root — the harness is part of what's marked");
 }
 
 const REFLECTION_NAME = /^(crit-\d+|assignment-\d+|final-project)\.md$/;

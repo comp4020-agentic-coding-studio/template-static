@@ -88,20 +88,12 @@ describe("check:evidence current reflection", () => {
     expect(result.stderr).toContain("reflections/crit-8.md");
   });
 
-  it("accepts WORKING.md for the no-AI route", () => {
-    const result = spawnSync(process.execPath, [script], {
-      cwd: fixture(["crit-8.md"], "WORKING.md"),
-      encoding: "utf8",
-    });
-    expect(result.status, result.stderr).toBe(0);
-  });
-
-  it("rejects a missing working-method file", () => {
+  it("rejects a missing CLAUDE.md", () => {
     const result = spawnSync(process.execPath, [script], {
       cwd: fixture(["crit-8.md"], ""),
       encoding: "utf8",
     });
     expect(result.status).toBe(1);
-    expect(result.stderr).toContain("no working-method file");
+    expect(result.stderr).toContain("no CLAUDE.md");
   });
 });
