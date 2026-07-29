@@ -15,6 +15,9 @@ describe("starter page", () => {
     ).toBe(true);
 
     const doc = new JSDOM(readFileSync(distPath, "utf8")).window.document;
-    expect(doc.querySelector('[data-testid="intro"]')).toBeTruthy();
+    expect(
+      doc.querySelector('[data-testid="intro"]'),
+      "This described the starter page you've now replaced. Replace it with a test for this week's published spec, or delete it — don't re-add the attribute to make it pass.",
+    ).toBeTruthy();
   });
 });
