@@ -3,8 +3,8 @@
 Every deliverable's spec — what the markers consider when they judge whether
 your work matches what was required — is published on the course website, and
 this repo's name tells you which one applies: the course API maps repo prefixes
-to deliverables, and the `new-week` course skill walks your agent through
-pulling the right one. Read the spec on the site first; it's the contract.
+to deliverables, and the `start` course skill walks your agent through pulling
+the right one. Read the spec on the site first; it's the contract.
 
 The checks in this directory come in three kinds:
 

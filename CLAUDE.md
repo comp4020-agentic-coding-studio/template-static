@@ -10,7 +10,7 @@ whether it is.
 
 What you're building this week — the spec — is published on the course website,
 and this repo's name tells you which deliverable it is. Run the course plugin's
-**new-week** skill at the start of each week: it pulls the right spec from the
+**start** skill at the start of each week: it pulls the right spec from the
 course API, carries your harness forward from last week, and helps you turn the
 spec's checkable lines into tests of your own. Read the spec before you build,
 and see `spec/README.md` for how the checks in this repo relate to it.

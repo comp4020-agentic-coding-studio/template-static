@@ -2,8 +2,8 @@
 
 A starter template for static-site prototypes in **COMP4020 / COMP8020 Agentic
 Coding Studio**. The course provisions a repo from this template for each
-deliverable --- you don't create it yourself. The `new-week` course skill clones
-it for you; from there, build your prototype and deploy it to GitHub Pages.
+deliverable --- you don't create it yourself. The `start` course skill clones it
+for you; from there, build your prototype and deploy it to GitHub Pages.
 
 ## CI and Pages only turn on when you ship
 
