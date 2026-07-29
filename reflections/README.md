@@ -12,8 +12,8 @@ One short markdown file per deliverable, named for the deliverable it answers
 
 Each answers the two standing prompts:
 
-1. What did this work change about who I want to be as a software developer?
-2. What was the breakthrough that moved the work forward?
+1. What was the breakthrough that moved the work forward?
+2. What did this work change about who I want to be as a software developer?
 
 150--300 words is plenty. `pnpm check:evidence` checks the name, because your
 marker reads that exact file --- anything else reads as no reflection at all.
