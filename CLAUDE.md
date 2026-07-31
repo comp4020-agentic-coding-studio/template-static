@@ -48,6 +48,10 @@ While the repo is private (all week, until you ship) the CI jobs stay skipped
 anyway. They aren't hoops. Each is a different way of finding out something true
 about the site that you can't reliably see by looking at it.
 
+They also carry a mark at a crit: the sweep runs fifteen minutes after your
+cutoff, and green checks there are worth half that week's shipped mark. Still
+running counts as not green, so ship with time for CI to finish.
+
 - **typecheck** --- `tsc --noEmit` runs first in `pnpm check`, so a type error
   stops the roster before the build even starts. The types are extra
   backpressure: a red here is the compiler telling you a claim in the code is
