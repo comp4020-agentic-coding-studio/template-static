@@ -44,7 +44,7 @@ problems with mise.
 - `mise.toml` --- the tested Node and pnpm versions for this template.
 - `spec/` --- what the checks are for (`README.md`), the shipped invariants
   (`invariants.test.ts`), and a replaceable starter test (`starter.test.ts`);
-  your own spec tests live alongside them.
+  the spec tests you write live alongside them.
 - `CLAUDE.md` --- orients your coding agent: what the checks mean and how to
   work here. Yours to grow.
 - `PROCESS.md` --- a template for your process overview, showing the

@@ -4,7 +4,8 @@ Every deliverable's spec — what the markers consider when they judge whether
 your work matches what was required — is published on the course website, and
 this repo's name tells you which one applies: the course API maps repo prefixes
 to deliverables, and the `start` course skill walks your agent through pulling
-the right one. Read the spec on the site first; it's the contract.
+the right one. The brief poses the problem; the spec is the fixed contract. Read
+both on the site before you plan or build.
 
 The checks in this directory come in three kinds:
 
