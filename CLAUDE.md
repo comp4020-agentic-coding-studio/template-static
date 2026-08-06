@@ -115,6 +115,11 @@ generators (Astro included) need `base` set explicitly, and getting it wrong
 looks fine locally while every asset 404s on the live URL. And commit the
 updated `pnpm-lock.yaml`: CI installs with `--frozen-lockfile`.
 
+For the course default (Astro) or the bare hand-written arm, don't wire the swap
+by hand: the course plugin's `stack` skill runs a tested conversion script that
+handles both of the traps above plus the CI link-check patch, and leaves the
+whole change staged as one reviewable diff.
+
 ## Your process is part of the mark
 
 The deployed page is only half of it. How you got there is marked too: your

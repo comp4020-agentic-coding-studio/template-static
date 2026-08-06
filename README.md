@@ -58,7 +58,10 @@ problems with mise.
 
 This template is SSG-agnostic: it's plain HTML/CSS/TypeScript on Vite, so you
 can add Astro, Eleventy, or any static generator later without changing how it
-deploys. TypeScript is the course default over plain JavaScript: the types are
-extra backpressure, and your agent feels it before you do.
+deploys. The course plugin's `stack` skill performs the swap for you — to the
+course default (Astro) or stripped to bare HTML/CSS — with the Pages base path,
+lockfile, and CI link check handled. TypeScript is the course default over plain
+JavaScript: the types are extra backpressure, and your agent feels it before you
+do.
 
 See the course site for how the checks map to each week of the course.
