@@ -64,8 +64,8 @@ running counts as not green, so ship with time for CI to finish.
   if it loads locally.
 - **spec** --- `spec/invariants.test.ts` asserts what's true of any good
   website, whatever the week's brief asks; the tests you write for the week's
-  spec run alongside it (any `spec/*.test.ts`). A failure names the contract
-  you haven't met yet.
+  spec run alongside it (any `spec/*.test.ts`). A failure names the contract you
+  haven't met yet.
 - **lint** --- `stylelint` for CSS, `oxlint` for TypeScript. Flags code that's
   wrong, fragile, or non-idiomatic. Read the rule it names.
 - **tests** --- any other tests you write, wherever you put them (co-located
