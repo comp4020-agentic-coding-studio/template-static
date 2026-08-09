@@ -151,7 +151,7 @@ means building legibly is part of building well.
   work changed about the developer you want to be. It stays out of the deployed
   site. It's due at the cutoff, and if it isn't in the repo by then the week
   doesn't count as shipped, however good the prototype is.
-- **This file is process evidence.** The harness you build to direct the agent,
+- **This file is process evidence.** The harness you build to direct the work,
   this `CLAUDE.md` and any `AGENTS.md`, is itself read as part of how you
   worked. Keep it honest and current (see below).
 
@@ -161,8 +161,8 @@ know whose repo it is. Spend the effort on the work.
 ## This file is yours
 
 This CLAUDE.md is a starting point, not a fixed rulebook. As you learn what your
-prototype needs --- a convention to hold the agent to, a sensor that keeps
-catching you out, a fact about the stack the agent keeps getting wrong --- write
-it down here. Growing this file is the work of harness engineering, and the gap
+prototype needs --- a convention the work has to hold to, a sensor that keeps
+catching you out, a fact about the stack that's easy to get wrong --- write it
+down here. Growing this file is the work of harness engineering, and the gap
 between this boilerplate and your own version is part of what your prototype
 says about the developer you're becoming.

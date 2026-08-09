@@ -45,8 +45,8 @@ problems with mise.
 - `spec/` --- what the checks are for (`README.md`), the shipped invariants
   (`invariants.test.ts`), and a replaceable starter test (`starter.test.ts`);
   the spec tests you write live alongside them.
-- `CLAUDE.md` --- orients your coding agent: what the checks mean and how to
-  work here. Yours to grow.
+- `CLAUDE.md` --- orients whoever works in this repo, you or a coding agent:
+  what the checks mean and how to work here. Yours to grow.
 - `PROCESS.md` --- a template for your process overview, showing the
   cited-moment format. Replace it with your own; `pnpm check:evidence` verifies
   your citations resolve.
@@ -61,7 +61,7 @@ can add Astro, Eleventy, or any static generator later without changing how it
 deploys. The course plugin's `stack` skill performs the swap for you — to the
 course default (Astro) or stripped to bare HTML/CSS — with the Pages base path,
 lockfile, and CI link check handled. TypeScript is the course default over plain
-JavaScript: the types are extra backpressure, and your agent feels it before you
-do.
+JavaScript: the types are extra backpressure, and they catch a false claim in
+the code before you do.
 
 See the course site for how the checks map to each week of the course.
