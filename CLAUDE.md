@@ -22,7 +22,8 @@ you plan or build, and see `spec/README.md` for how the checks relate to them.
 - Before you push, run `pnpm check`. It runs most of what CI runs --- build,
   lint, and the spec --- so you catch those in seconds instead of waiting for
   the pipeline. The links check, the evidence check, the secrets scan, and the
-  deploy itself only run in CI; run `pnpm dlx linkinator ./dist --silent`
+  deploy itself only run in CI; run
+  `pnpm dlx linkinator ./dist --silent --skip "^https?://(?!localhost|127)"`
   locally against a fresh `pnpm build` for the links check without waiting for
   CI.
 - To see what the page actually looks like rather than what you assume it looks
@@ -83,7 +84,9 @@ running counts as not green, so ship with time for CI to finish.
   [assessment page](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#what-you-submit)
   for what counts as evidence.
 - **links** --- internal links must resolve. A broken link is a dead end you
-  didn't mean to ship.
+  didn't mean to ship. Links off your site aren't checked, so that a third
+  party's rate limiter can't decide whether your site ships --- a dead outbound
+  link is yours to catch.
 - **secrets** --- the repo is scanned for committed credentials. Never put a
   key, token, or password in a tracked file. If one leaks, rotate it. A local
   pre-commit hook (`.githooks/pre-commit`, installed by `pnpm install`) also

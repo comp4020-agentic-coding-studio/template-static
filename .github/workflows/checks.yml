@@ -42,7 +42,16 @@ jobs:
         if: ${{ !github.event.repository.is_template }}
         run: pnpm check:evidence
       - name: Check internal links
-        run: pnpm dlx linkinator ./dist --silent
+        # Internal links only. linkinator checks outbound links by default, so
+        # someone else's rate limiter or outage would redden a build with
+        # nothing wrong in it --- crit 2 alone points the whole cohort at real
+        # orgs' sites and their socials. The regex skips anything not on the
+        # local origin the built site is served from; both spellings are named
+        # because a bare `--skip "^https?://"` matches that origin too and
+        # passes having scanned zero links. The stack skill rewrites the
+        # command below when it converts the repo to Astro, and carries the
+        # same skip over, so this comment holds either way.
+        run: pnpm dlx linkinator ./dist --silent --skip "^https?://(?!localhost|127)"
       - name: Scan for committed secrets
         # Pinned, both halves: the SHA fixes the action's script, and `version`
         # fixes the scanner image, which otherwise floats on :latest. These two
