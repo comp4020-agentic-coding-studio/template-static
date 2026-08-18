@@ -22,8 +22,14 @@ which deliverable applies. Read both before you plan or build.
 
 `public/card.png` is the image people see when a link to the site is shared, and
 `index.html`'s head points at it. Both are placeholders: replace the picture
-(keep it 1200x630) and the `description` meta, and add the same two tags to any
-new page you write. The invariants check they are there, not that they are good.
+(keep it 1200x630) and the `description` meta, and copy the same head block into
+any new page you write. The invariants check the tags are there and that the
+card is a file the build emitted, not that either is any good.
+
+Write the card path relative to the page. Scrapers won't resolve a relative
+`og:image`, so `vite.config.ts` rewrites it to the deployed
+`https://<owner>.github.io/<repo>/...` URL at build time --- which is also why
+that URL only appears once the repo has an `origin`.
 
 ## The checks
 

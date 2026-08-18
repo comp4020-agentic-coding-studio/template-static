@@ -1,6 +1,8 @@
+import { execFileSync } from "node:child_process";
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
-import { defineConfig } from "vite";
+import { type Plugin, defineConfig } from "vite";
+import { resolveDeployment } from "./scripts/pages-base.ts";
 
 // Every .html file in the repo is a page and a build entry, so a multi-page
 // hand-written site needs no build config: add pages, link them, ship.
@@ -17,10 +19,56 @@ function htmlEntries(dir = "."): string[] {
   });
 }
 
+/** The origin remote, or undefined outside a git checkout. */
+function gitOrigin(): string | undefined {
+  try {
+    return execFileSync("git", ["remote", "get-url", "origin"], {
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    });
+  } catch {
+    return undefined;
+  }
+}
+
+// A card image is the one URL on the page that has to be absolute: a scraper
+// fetches the page on its own, so a relative og:image has nothing to resolve
+// against and Facebook and LinkedIn both drop the card. Write the path relative
+// to the page like any other link; the build stamps in the deployed URL. Until
+// the repo has a remote there is no address to stamp, and a card for a site
+// nobody can reach isn't worth much anyway.
+function absoluteCardUrls(): Plugin {
+  const { site, base } = resolveDeployment(process.env, gitOrigin);
+  const cardMeta = /property=["']og:image["']|name=["']twitter:image["']/;
+
+  return {
+    name: "absolute-card-urls",
+    apply: "build",
+    transformIndexHtml(html, ctx) {
+      if (!site) return html;
+      const page = new URL(join(base, ctx.path), site);
+      return html.replace(/<meta\b[^>]*>/g, (tag) =>
+        cardMeta.test(tag)
+          ? tag.replace(/(content=["'])([^"']*)(["'])/, (whole, open, url, close) => {
+              try {
+                return `${open}${new URL(url, page).href}${close}`;
+              } catch {
+                // Not a URL at all. Leave it be: the invariants say so far
+                // more clearly than a build crash in here would.
+                return whole;
+              }
+            })
+          : tag,
+      );
+    },
+  };
+}
+
 // `base: "./"` makes built asset URLs relative, so the site works under any
 // GitHub Pages path (username.github.io/your-repo/) without further config.
 export default defineConfig({
   base: "./",
+  plugins: [absoluteCardUrls()],
   build: {
     rollupOptions: {
       input: htmlEntries(),

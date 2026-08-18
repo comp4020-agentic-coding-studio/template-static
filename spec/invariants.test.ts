@@ -62,16 +62,16 @@ describe("invariants: every page", () => {
           "with no card image, a shared link renders as a bare row of text",
         ).toBeTruthy();
 
-        // The tag can carry an origin and a base path (GitHub Pages serves a
-        // project repo under /<repo>/), neither of which is part of the path
-        // on disk, so compare the tail of the URL's path against what shipped.
-        // A card hosted somewhere else can't be checked without a network, so
-        // an absolute URL that matches nothing here is taken on trust.
+        // The tag carries an origin and a base path (GitHub Pages serves a
+        // project repo under /<repo>/), neither of which is part of the path on
+        // disk, so compare the tail of the URL's path against what shipped. The
+        // card has to be a file this build emitted: one hosted somewhere else
+        // can't be checked from here, and a card that goes dark when someone
+        // else's host does isn't much of a card.
         const path = new URL(card!, `https://example.invalid/${name}`).pathname;
-        const local = shipped.some((file) => path.endsWith(`/${file}`));
         expect(
-          local || /^https?:\/\//i.test(card!),
-          `og:image "${card}" is not a file in dist/`,
+          shipped.some((file) => path.endsWith(`/${file}`)),
+          `og:image "${card}" is not a file this build emitted`,
         ).toBe(true);
       });
 

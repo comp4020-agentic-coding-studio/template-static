@@ -16,9 +16,9 @@
       apart. og:image has no fallback, so without it a shared link renders as a
       bare row of text.
 
-      The card is public/card.png --- replace it, and keep it 1200x630. The path
-      is relative to this page, because GitHub Pages serves the site from a
-      sub-path this file cannot know.
+      The card is public/card.png --- replace it, and keep it 1200x630. Write
+      the path relative to this page like any other link; a scraper needs an
+      absolute one, and the build stamps in the deployed URL (vite.config.ts).
     -->
     <meta property="og:type" content="website" />
     <meta property="og:image" content="./card.png" />
