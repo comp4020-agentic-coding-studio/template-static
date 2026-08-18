@@ -2,36 +2,19 @@
 // Checks the process evidence every submission carries: PROCESS.md with its
 // template boilerplate gone, every cited commit hash resolving to a real
 // commit in this repo (a citation is a markdown link whose text is an
-// abbreviated SHA or a sha...sha range), the current deliverable's exact
-// reflection entry, and your CLAUDE.md. Bare minimum, on purpose.
+// abbreviated SHA or a sha...sha range), a reflection entry the marker reads,
+// and your CLAUDE.md. Bare minimum, on purpose.
 //
-// The current deliverable is worked out live: the repo's name carries the
-// deliverable prefix (repo = <repoPrefix>-<handle>), and the course API says
-// which of that prefix's deliverables is current this week. No local state.
-// If the API can't be reached the reflection check is skipped with a warning
-// rather than failing — a network blip must never block a ship at the cutoff.
+// The repo's name carries the deliverable prefix (repo = <prefix>-<handle>),
+// and the reflection is named for the deliverable, so the expected names
+// derive from the name alone --- offline, no course API, nothing to time out
+// at the ship cutoff. The final-project repo spans several deliverables; any
+// one of its names counts here, and the tutor sees the gaps at the crit.
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
-const API_URL =
-  process.env.COMP4020_CRIT_GROUPS_URL ??
-  "https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/api/crit-groups.json";
-
 const REFLECTION_NAME = /^(crit-\d+|assignment-\d+|final-project)\.md$/;
-
-export type Deliverable = {
-  kind: "crit" | "assessment";
-  slug: string;
-  week: number;
-  repoPrefix?: string;
-};
-
-export type Payload = {
-  timezone: string;
-  weeks: { week: number; monday: string }[];
-  deliverables: Deliverable[];
-};
 
 // The repo's name is the one fact linking this working copy to a published
 // deliverable. In CI it's authoritative; locally it comes from origin.
@@ -52,37 +35,19 @@ export function repoName(): string | undefined {
   }
 }
 
-// Which of this repo's deliverables is current: the latest one whose teaching
-// week has started, else the first still to come. An assessment outranks a
-// crit in a shared week — the retro crit reads the assignment's reflection.
-export function currentDeliverable(
-  payload: Payload,
-  repo: string,
-  today: string,
-): Deliverable | undefined {
-  const mine = payload.deliverables
-    .filter((d) => d.repoPrefix && repo.startsWith(`${d.repoPrefix}-`))
-    .toSorted((a, b) => a.week - b.week);
-  if (mine.length === 0) return undefined;
-  const currentWeek = Math.max(
-    0,
-    ...payload.weeks.filter((w) => w.monday <= today).map((w) => w.week),
-  );
-  const pick = mine.findLast((d) => d.week <= currentWeek) ?? mine[0];
-  return mine.find((d) => d.week === pick.week && d.kind === "assessment") ?? pick;
+/** The reflection filenames the marker reads for this repo, from its name
+ *  alone; null for a repo without a course prefix. */
+export function expectedReflections(repo: string): string[] | null {
+  const crit = repo.match(/^comp4020-crit(\d+)-/);
+  if (crit) return [`crit-${Number.parseInt(crit[1], 10)}.md`];
+  const assignment = repo.match(/^comp4020-ass(\d+)-/);
+  if (assignment) return [`assignment-${assignment[1]}.md`];
+  if (repo.startsWith("comp4020-final-"))
+    return ["crit-8.md", "crit-9.md", "crit-10.md", "final-project.md"];
+  return null;
 }
 
-export function reflectionFor(deliverable: Deliverable): string {
-  if (deliverable.kind === "assessment") return `${deliverable.slug}.md`;
-  return `crit-${Number.parseInt(deliverable.slug, 10)}.md`;
-}
-
-function todayIn(timezone: string): string {
-  // en-CA renders as YYYY-MM-DD, matching the API's monday strings
-  return new Intl.DateTimeFormat("en-CA", { timeZone: timezone }).format(new Date());
-}
-
-async function main(): Promise<void> {
+function main(): void {
   let failed = false;
   const fail = (msg: string): void => {
     console.error(`✗ ${msg}`);
@@ -104,31 +69,21 @@ async function main(): Promise<void> {
   }
 
   const repo = repoName();
+  const expected = repo && expectedReflections(repo);
   if (!repo) {
-    skip("no origin remote to name this repo — skipping the current-reflection check");
+    skip("no origin remote to name this repo — skipping the reflection check");
+  } else if (!expected) {
+    skip(`${repo} doesn't carry a course repo prefix — skipping the reflection check`);
   } else {
-    let payload: Payload | undefined;
-    try {
-      const response = await fetch(API_URL, { signal: AbortSignal.timeout(10_000) });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      payload = (await response.json()) as Payload;
-    } catch {
-      skip(`couldn't reach the course API — skipping the current-reflection check (${API_URL})`);
-    }
-    if (payload) {
-      const deliverable = currentDeliverable(payload, repo, todayIn(payload.timezone));
-      if (!deliverable) {
-        skip(`${repo} doesn't carry a course repo prefix — skipping the current-reflection check`);
-      } else {
-        const expected = reflectionFor(deliverable);
-        if (reflections.includes(expected)) {
-          console.log(`✓ reflections/${expected}: current deliverable entry (${deliverable.slug})`);
-        } else {
-          fail(
-            `current reflection is missing — the marker reads reflections/${expected} for ${deliverable.slug}`,
-          );
-        }
-      }
+    const found = expected.filter((name) => reflections.includes(name));
+    if (found.length > 0) {
+      console.log(`✓ reflections/${found.join(", reflections/")}: entries the marker reads`);
+    } else {
+      fail(
+        expected.length === 1
+          ? `no reflection — the marker reads reflections/${expected[0]}`
+          : `no reflection — the marker reads these names: ${expected.join(", ")}`,
+      );
     }
   }
 
@@ -174,5 +129,5 @@ async function main(): Promise<void> {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  await main();
+  main();
 }

@@ -74,12 +74,12 @@ the four jobs in one paragraph, not to be imitated in content.
 
 ## Before you ship
 
-`pnpm check:evidence` verifies your citations resolve to real commits, that the
-current reflection entry is in `reflections/`, and that your `CLAUDE.md` is
-there --- before a marker ever opens the file. It checks that your map is
-traceable, not that it is good: the marker judges whether your small,
-deliberately chosen set of moments shows real judgement and reflection. A green
-check is not a substitute for that curation.
+`pnpm check:evidence` verifies your citations resolve to real commits, that a
+reflection entry the marker reads is in `reflections/`, and that your
+`CLAUDE.md` is there --- before a marker ever opens the file. It checks that
+your map is traceable, not that it is good: the marker judges whether your
+small, deliberately chosen set of moments shows real judgement and reflection. A
+green check is not a substitute for that curation.
 
 Images are deliberately not checked, because whether one renders is visible the
 moment you look. Open this file on GitHub and look at it before you ship.
