@@ -18,6 +18,13 @@ which deliverable applies. Read both before you plan or build.
 - When a check fails, read its output before you change anything.
 - Never commit a red state.
 
+## The link-preview card
+
+`public/card.png` is the image people see when a link to the site is shared, and
+`index.html`'s head points at it. Both are placeholders: replace the picture
+(keep it 1200x630) and the `description` meta, and add the same two tags to any
+new page you write. The invariants check they are there, not that they are good.
+
 ## The checks
 
 `typecheck`, `build`, `deploy`, `spec`, `lint`, `tests`, `evidence`, `links`,

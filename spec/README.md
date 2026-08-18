@@ -13,9 +13,16 @@ The checks in this directory come in three kinds:
 
 `invariants.test.ts` asserts things that are true of any good website, however
 you build it and whatever the week's brief asks: a navigation landmark, exactly
-one top-level heading, a document language, a real title, a mobile viewport, and
-alt text on images. They run against the **built** site (`dist/`), so they check
-what actually ships. Keep them green; don't delete them.
+one top-level heading, a document language, a real title, a meta description, an
+`og:image` card, a mobile viewport, and alt text on images. They run against the
+**built** site (`dist/`), so they check what actually ships. Keep them green;
+don't delete them.
+
+The description and the card are what a link to your site looks like when
+someone shares it — in a message, on the hall-of-fame gallery. A scraper can
+fall back to the page's own title and description if the meta tags are missing;
+there is no fallback for the card image, so without it a shared link renders as
+a bare row of text.
 
 ## A worked example (yours to replace)
 

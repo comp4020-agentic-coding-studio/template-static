@@ -4,6 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>COMP4020 prototype</title>
+    <meta
+      name="description"
+      content="Replace this with one sentence saying what this page is. A search result and a link preview both show it."
+    />
+
+    <!--
+      What a link to this page looks like when someone shares it. og:title and
+      og:description are deliberately absent: scrapers fall back to the <title>
+      and the description above, and two copies of the same sentence only drift
+      apart. og:image has no fallback, so without it a shared link renders as a
+      bare row of text.
+
+      The card is public/card.png --- replace it, and keep it 1200x630. The path
+      is relative to this page, because GitHub Pages serves the site from a
+      sub-path this file cannot know.
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./card.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
