@@ -34,7 +34,7 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Build, lint, and run the spec
+      - name: Build and run the spec
         run: pnpm check
       - name: Check the process evidence
         # skipped in the template repo itself, where PROCESS.md is still the
