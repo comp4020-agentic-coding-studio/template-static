@@ -37,6 +37,8 @@ const fixtures: string[] = [];
 
 const env = {
   ...process.env,
+  // in CI this names the repo running the tests, not the fixture
+  GITHUB_REPOSITORY: "",
   GIT_CONFIG_GLOBAL: "/dev/null",
   GIT_CONFIG_SYSTEM: "/dev/null",
 };
