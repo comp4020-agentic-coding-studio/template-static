@@ -35,8 +35,8 @@ best-effort.
 
 ## The checks
 
-`typecheck`, `build`, `deploy`, `spec`, `lint`, `tests`, `evidence`, `links`,
-`secrets`. Run `pnpm check`. Read the failure.
+`typecheck`, `build`, `deploy`, `spec`, `tests`, `evidence`, `links`, `secrets`.
+Run `pnpm check`. Read the failure.
 
 `spec/README.md`, `PROCESS.md` and `reflections/README.md` are in this repo and
 say what they are for.
@@ -47,3 +47,8 @@ A starting point, not a rulebook. As you learn what your prototype needs --- a
 convention the work has to hold to, a sensor that keeps catching you out, a fact
 about the stack that is easy to get wrong --- write it down here. Growing this
 file is the work.
+
+The template ships no linter, on purpose. When the code keeps needing the same
+correction, that's your cue to add one (oxlint for TS, stylelint for CSS) and
+wire it into `check` --- a sensor you added because you needed it is worth more
+than one you inherited.
