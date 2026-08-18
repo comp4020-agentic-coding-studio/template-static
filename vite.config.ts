@@ -1,8 +1,7 @@
-import { execFileSync } from "node:child_process";
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
 import { type Plugin, defineConfig } from "vite";
-import { resolveDeployment } from "./scripts/pages-base.ts";
+import { gitOrigin, resolveDeployment } from "./scripts/pages-base.ts";
 
 // Every .html file in the repo is a page and a build entry, so a multi-page
 // hand-written site needs no build config: add pages, link them, ship.
@@ -17,18 +16,6 @@ function htmlEntries(dir = "."): string[] {
     if (entry.isDirectory()) return htmlEntries(path);
     return entry.name.endsWith(".html") ? [path] : [];
   });
-}
-
-/** The origin remote, or undefined outside a git checkout. */
-function gitOrigin(): string | undefined {
-  try {
-    return execFileSync("git", ["remote", "get-url", "origin"], {
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
-    });
-  } catch {
-    return undefined;
-  }
 }
 
 // A card image is the one URL on the page that has to be absolute: a scraper

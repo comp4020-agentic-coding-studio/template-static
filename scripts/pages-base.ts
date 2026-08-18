@@ -1,3 +1,5 @@
+import { execFileSync } from "node:child_process";
+
 // Where this site will be served from.
 //
 // GitHub Pages serves a project repo under a sub-path
@@ -10,6 +12,19 @@
 // A template can't hardcode the address, because it doesn't know the repo name
 // until you generate from it. So it's derived: GITHUB_REPOSITORY in Actions,
 // the origin remote otherwise.
+
+/** The origin remote, or undefined outside a git checkout. Impure, and kept
+ *  apart from the resolution below so that stays testable. */
+export function gitOrigin(): string | undefined {
+  try {
+    return execFileSync("git", ["remote", "get-url", "origin"], {
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    });
+  } catch {
+    return undefined;
+  }
+}
 
 export interface RepoSlug {
   owner: string;
