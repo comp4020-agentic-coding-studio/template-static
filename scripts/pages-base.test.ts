@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { pagesUrl, parseRepoSlug, resolveDeployment } from "../scripts/pages-base.ts";
+import { pagesUrl, parseRepoSlug, resolveDeployment } from "./pages-base.ts";
 
 // Where the site ends up is invisible locally --- `pnpm dev` and `pnpm preview`
 // both serve at the root --- and only the deployed URL shows a wrong answer. So
