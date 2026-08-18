@@ -23,9 +23,9 @@ someone shares it. The hall-of-fame gallery resolves the card against your
 page's URL the way a browser resolves any link; chat platforms vary, and some
 only honour an absolute URL, so the gallery is the consumer the course
 guarantees. There is no fallback for the card image, so without it a shared link
-renders as a bare row of text. (The invariants lean on `scripts/pages-base.ts`
-to work out the deployed URL; that helper and its tests are template plumbing,
-not part of your spec.)
+renders as a bare row of text. The check here is presence only: a card path that
+doesn't resolve shows up as a gap in the gallery, not as a red check, so look at
+the deployed page's head when you add pages.
 
 ## A worked example (yours to replace)
 

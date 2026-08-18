@@ -23,14 +23,15 @@ which deliverable applies. Read both before you plan or build.
 `public/card.png` is the image people see when a link to the site is shared, and
 `index.html`'s head points at it. Both are placeholders: replace the picture
 (keep it 1200x630) and the `description` meta, and copy the same head block into
-any new page you write. The invariants check the tags are there and that the
-card resolves to a file the build emitted, not that either is any good.
+any new page you write. The invariants check the tags are there, not that either
+is any good.
 
 The card URL is resolved against the page that names it, exactly like any other
 link --- so `./card.png` is right for a page at the site root and wrong one
-directory down, which the invariants will catch. The course gallery resolves it
-that way; some chat platforms only honour an absolute URL, so off-site previews
-are best-effort.
+directory down. Nothing in CI checks that it resolves: a broken card shows up as
+a gap in the course gallery, so look at the deployed head when you add pages.
+Some chat platforms only honour an absolute URL, so off-site previews are
+best-effort.
 
 ## The checks
 
