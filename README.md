@@ -27,9 +27,10 @@ for the details.
 ```sh
 mise install       # supported path: install the template's Node and pnpm
 pnpm install
-pnpm dev        # local dev server
-pnpm check      # most of what CI runs (links, secrets, evidence and deploy are CI-only)
-pnpm build      # produce dist/ (what gets deployed)
+pnpm dev             # local dev server
+pnpm check           # most of what CI runs (links, secrets and deploy are CI-only)
+pnpm check:evidence  # the process-evidence check CI runs before you ship
+pnpm build           # produce dist/ (what gets deployed)
 
 # reproduce CI's links check before you push
 pnpm dlx linkinator ./dist --silent --skip "^https?://(?!localhost|127)"
