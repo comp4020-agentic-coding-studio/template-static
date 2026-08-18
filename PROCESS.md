@@ -81,5 +81,5 @@ your map is traceable, not that it is good: the marker judges whether your
 small, deliberately chosen set of moments shows real judgement and reflection. A
 green check is not a substitute for that curation.
 
-Images are deliberately not checked, because whether one renders is visible the
-moment you look. Open this file on GitHub and look at it before you ship.
+Images aren't checked: whether one renders is visible the moment you look. Open
+this file on GitHub and look at it before you ship.

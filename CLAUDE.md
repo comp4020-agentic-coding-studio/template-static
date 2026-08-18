@@ -20,18 +20,11 @@ which deliverable applies. Read both before you plan or build.
 
 ## The link-preview card
 
-`public/card.png` is the image people see when a link to the site is shared, and
-`index.html`'s head points at it. Both are placeholders: replace the picture
-(keep it 1200x630) and the `description` meta, and copy the same head block into
-any new page you write. The invariants check the tags are there, not that either
-is any good.
-
-The card URL is resolved against the page that names it, exactly like any other
-link --- so `./card.png` is right for a page at the site root and wrong one
-directory down. Nothing in CI checks that it resolves: a broken card shows up as
-a gap in the course gallery, so look at the deployed head when you add pages.
-Some chat platforms only honour an absolute URL, so off-site previews are
-best-effort.
+`public/card.png` (1200x630) is the image a shared link shows; `index.html`'s
+head points at it. Replace it and the `description` meta, and copy the head
+block into any new page. The card URL resolves against the page that names it,
+like any link --- `./card.png` is wrong one directory down, and nothing in CI
+checks it, so look at the deployed head when you add pages.
 
 ## The checks
 
@@ -44,11 +37,6 @@ say what they are for.
 ## This file is yours
 
 A starting point, not a rulebook. As you learn what your prototype needs --- a
-convention the work has to hold to, a sensor that keeps catching you out, a fact
-about the stack that is easy to get wrong --- write it down here. Growing this
-file is the work.
-
-The template ships no linter, on purpose. When the code keeps needing the same
-correction, that's your cue to add one (oxlint for TS, stylelint for CSS) and
-wire it into `check` --- a sensor you added because you needed it is worth more
-than one you inherited.
+convention the work has to hold to, a sensor that keeps catching you out (a
+linter, say), a fact about the stack that is easy to get wrong --- write it down
+here and wire it into `check`. Growing this file is the work.

@@ -19,13 +19,9 @@ one top-level heading, a document language, a real title, a meta description, an
 don't delete them.
 
 The description and the card are what a link to your site looks like when
-someone shares it. The hall-of-fame gallery resolves the card against your
-page's URL the way a browser resolves any link; chat platforms vary, and some
-only honour an absolute URL, so the gallery is the consumer the course
-guarantees. There is no fallback for the card image, so without it a shared link
-renders as a bare row of text. The check here is presence only: a card path that
-doesn't resolve shows up as a gap in the gallery, not as a red check, so look at
-the deployed page's head when you add pages.
+someone shares it. The card check is presence only: a path that doesn't resolve
+shows up in the course gallery, not as a red check, so look at the deployed head
+when you add pages.
 
 ## A worked example (yours to replace)
 

@@ -53,9 +53,7 @@ describe("invariants: every page", () => {
       });
 
       it("has an og:image card", () => {
-        // Presence only. Whether the path actually resolves is the gallery's
-        // job to notice --- it fetches each page the way a scraper does, and a
-        // broken card shows up there as a gap, not here as a red check.
+        // presence only: whether the path resolves shows up in the gallery
         const card = doc
           .querySelector('meta[property="og:image"]')
           ?.getAttribute("content")

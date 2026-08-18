@@ -3,13 +3,12 @@
 // template boilerplate gone, every cited commit hash resolving to a real
 // commit in this repo (a citation is a markdown link whose text is an
 // abbreviated SHA or a sha...sha range), a reflection entry the marker reads,
-// and your CLAUDE.md. Bare minimum, on purpose.
+// and your CLAUDE.md.
 //
 // The repo's name carries the deliverable prefix (repo = <prefix>-<handle>),
 // and the reflection is named for the deliverable, so the expected names
-// derive from the name alone --- offline, no course API, nothing to time out
-// at the ship cutoff. The final-project repo spans several deliverables; any
-// one of its names counts here, and the tutor sees the gaps at the crit.
+// derive from the name alone, offline. The final-project repo spans several
+// deliverables; any one of its names counts here.
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
@@ -119,10 +118,9 @@ function main(): void {
     }
   }
 
-  // Images are deliberately not checked. Whether one renders is visible the
-  // moment you look at PROCESS.md on GitHub, which is where it's read — unlike a
-  // citation whose SHA doesn't resolve, which looks perfectly fine rendered.
-  // This check covers what you can't see by looking; the rest is on you.
+  // Images aren't checked: whether one renders is visible the moment you look
+  // at PROCESS.md on GitHub, unlike a citation whose SHA doesn't resolve,
+  // which looks perfectly fine rendered.
 
   if (failed) process.exit(1);
   console.log(`✓ PROCESS.md: ${shas.size} cited commit(s) all resolve`);
