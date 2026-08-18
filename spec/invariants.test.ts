@@ -82,7 +82,7 @@ describe("invariants: every page", () => {
             : undefined;
         expect(
           path !== undefined && shipped.includes(path),
-          `og:image "${card}" is not a file this build emitted`,
+          `og:image "${card}" is not a file this build emitted — write it relative to this page, or root-absolute under the repo's base (from a shared layout)`,
         ).toBe(true);
       });
 

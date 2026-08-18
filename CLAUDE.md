@@ -24,12 +24,13 @@ which deliverable applies. Read both before you plan or build.
 `index.html`'s head points at it. Both are placeholders: replace the picture
 (keep it 1200x630) and the `description` meta, and copy the same head block into
 any new page you write. The invariants check the tags are there and that the
-card is a file the build emitted, not that either is any good.
+card resolves to a file the build emitted, not that either is any good.
 
-Write the card path relative to the page. Scrapers won't resolve a relative
-`og:image`, so `vite.config.ts` rewrites it to the deployed
-`https://<owner>.github.io/<repo>/...` URL at build time --- which is also why
-that URL only appears once the repo has an `origin`.
+The card URL is resolved against the page that names it, exactly like any other
+link --- so `./card.png` is right for a page at the site root and wrong one
+directory down, which the invariants will catch. The course gallery resolves it
+that way; some chat platforms only honour an absolute URL, so off-site previews
+are best-effort.
 
 ## The checks
 

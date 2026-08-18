@@ -19,10 +19,13 @@ one top-level heading, a document language, a real title, a meta description, an
 don't delete them.
 
 The description and the card are what a link to your site looks like when
-someone shares it — in a message, on the hall-of-fame gallery. A scraper can
-fall back to the page's own title and description if the meta tags are missing;
-there is no fallback for the card image, so without it a shared link renders as
-a bare row of text.
+someone shares it. The hall-of-fame gallery resolves the card against your
+page's URL the way a browser resolves any link; chat platforms vary, and some
+only honour an absolute URL, so the gallery is the consumer the course
+guarantees. There is no fallback for the card image, so without it a shared link
+renders as a bare row of text. (The invariants lean on `scripts/pages-base.ts`
+to work out the deployed URL; that helper and its tests are template plumbing,
+not part of your spec.)
 
 ## A worked example (yours to replace)
 

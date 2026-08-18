@@ -16,9 +16,12 @@
       apart. og:image has no fallback, so without it a shared link renders as a
       bare row of text.
 
-      The card is public/card.png --- replace it, and keep it 1200x630. Write
-      the path relative to this page like any other link: whatever fetches this
-      page resolves it the same way your browser does.
+      The card is public/card.png --- replace it, and keep it 1200x630. Its URL
+      is resolved against the page that names it, like any link: page-relative
+      is right for a page at the site root, and a head shared across pages (a
+      layout) wants a root-absolute path under the repo's base instead. The
+      course gallery resolves either; some chat platforms only honour an
+      absolute URL, so off-site previews are best-effort.
     -->
     <meta property="og:type" content="website" />
     <meta property="og:image" content="./card.png" />
