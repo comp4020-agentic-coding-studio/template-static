@@ -28,8 +28,8 @@ checks it, so look at the deployed head when you add pages.
 
 ## The checks
 
-`typecheck`, `build`, `deploy`, `spec`, `tests`, `evidence`, `links`, `secrets`.
-Run `pnpm check`. Read the failure.
+`pnpm check` runs them (`pnpm check:evidence` is the extra gate before you
+ship); CI runs the same plus links, secrets and the deploy. Read the failure.
 
 `spec/README.md`, `PROCESS.md` and `reflections/README.md` are in this repo and
 say what they are for.
