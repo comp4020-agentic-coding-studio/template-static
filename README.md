@@ -45,11 +45,10 @@ problems with mise.
 
 - `index.html`, `styles.css`, `main.ts` --- a minimal starting site. Replace it.
 - `mise.toml` --- the tested Node and pnpm versions for this template.
-- `spec/` --- what the checks are for (`README.md`), the shipped invariants
-  (`invariants.test.ts`), and a replaceable starter test (`starter.test.ts`);
-  the spec tests you write live alongside them.
-- `CLAUDE.md` --- orients whoever works in this repo, you or a coding agent:
-  what the checks mean and how to work here. Yours to grow.
+- `spec/` --- what the checks are for (`README.md`) and the shipped invariants
+  (`invariants.test.ts`); the spec tests you write live alongside them.
+- `CLAUDE.md` --- orients whoever works in this repo, you or a coding agent.
+  Yours to grow.
 - `PROCESS.md` --- a template for your process overview, showing the
   cited-moment format. Replace it with your own; `pnpm check:evidence` verifies
   your citations resolve.

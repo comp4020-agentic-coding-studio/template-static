@@ -7,7 +7,7 @@ to deliverables, and the `start` course skill walks your agent through pulling
 the right one. The brief poses the problem; the spec is the fixed contract. Read
 both on the site before you plan or build.
 
-The checks in this directory come in three kinds:
+The checks in this directory come in two kinds:
 
 ## Invariants (shipped, always on)
 
@@ -22,13 +22,6 @@ The description and the card are what a link to your site looks like when
 someone shares it. The card check is presence only: a path that doesn't resolve
 shows up in the course gallery, not as a red check, so look at the deployed head
 when you add pages.
-
-## A worked example (yours to replace)
-
-`starter.test.ts` shows the shape of a spec test: it checks the starter page's
-intro hook. It's a worked example, not part of the always-on contract — replace
-or delete it when you replace the starter page. A starter implementation detail
-is not a universal invariant.
 
 ## Your spec tests (yours to write)
 
