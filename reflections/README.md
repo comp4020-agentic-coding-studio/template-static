@@ -5,8 +5,9 @@ One short markdown file per deliverable, named for the deliverable it answers
 
 - `crit-1.md` in `comp4020-crit1-<you>`, `crit-2.md` in `comp4020-crit2-<you>`,
   and so on
-- `assignment-1.md` in `comp4020-ass1-<you>`. The assignment crits are retros,
-  so they read this entry rather than asking for a second one
+- `assignment-1.md` in `comp4020-ass1-<you>`, or `assignment-2.md` in
+  `comp4020-ass2-<you>`. The assignment crits are retros, so they read this
+  entry rather than asking for a second one
 - the final-project repo carries several: `crit-8.md`, `crit-9.md` and
   `crit-10.md` for its three crits, plus `final-project.md` at submission
 
