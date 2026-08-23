@@ -41,15 +41,12 @@ survive a change of approach, or of stack.
 
 Two kinds end up in here, and they have different lifespans:
 
-- **contract tests** answer this week's published spec — that play ends
-  somewhere, that the site is pure HTML and CSS. They retire with the brief they
-  answer, so they stay behind when the week does.
-- **sensors** assert a standard you hold the agent to whatever the brief is: no
-  bare `toLocaleDateString`, no inline `style` attributes, nothing left logging
-  to the console in shipped output. A sensor is harness, the same as a rule in
-  `CLAUDE.md`, so it comes with you into next week's repo. Catching a recurring
-  failure once and wiring it into `check` is the skilled move; re-prompting
-  until it passes is the routine one.
+- **contract tests** answer this week's published spec. They retire with the
+  brief they answer, so they stay behind when the week does.
+- **sensors** assert a standard you hold the agent to whatever the brief is. A
+  sensor is harness, the same as a rule in `CLAUDE.md`, so it comes with you
+  into next week's repo. Catching a recurring failure once and wiring it into
+  `check` is the skilled move; re-prompting until it passes is the routine one.
 
 By the end of semester the sensors you've accumulated are the clearest record
 you have of what you've taught yourself to check for — worth citing in

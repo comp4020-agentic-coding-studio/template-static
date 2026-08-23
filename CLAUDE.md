@@ -37,9 +37,9 @@ say what they are for.
 ## This file is yours
 
 A starting point, not a rulebook. As you learn what your prototype needs --- a
-convention the work has to hold to, a sensor that keeps catching you out (a
-linter, say), a fact about the stack that is easy to get wrong --- write it down
-here and wire it into `check`. Growing this file is the work.
+convention the work has to hold to, a sensor that keeps catching you out, a fact
+about the stack that is easy to get wrong --- write it down here and wire it
+into `check`. Growing this file is the work.
 
 This file and the sensors you wire into `check` are your harness, and they carry
 across the course: both come with you into next week's repo. The prototype
