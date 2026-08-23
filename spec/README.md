@@ -45,8 +45,8 @@ Two kinds end up in here, and they have different lifespans:
   somewhere, that the site is pure HTML and CSS. They retire with the brief they
   answer, so they stay behind when the week does.
 - **sensors** assert a standard you hold the agent to whatever the brief is: no
-  bare `toLocaleDateString`, alt text on every image, nothing left logging to
-  the console in shipped output. A sensor is harness, the same as a rule in
+  bare `toLocaleDateString`, no inline `style` attributes, nothing left logging
+  to the console in shipped output. A sensor is harness, the same as a rule in
   `CLAUDE.md`, so it comes with you into next week's repo. Catching a recurring
   failure once and wiring it into `check` is the skilled move; re-prompting
   until it passes is the routine one.
