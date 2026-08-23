@@ -76,7 +76,22 @@ jobs:
             --no-verification
 
   deploy:
-    needs: check
+    # Deliberately not `needs: check`. A blocked deploy does not take a site
+    # offline --- Pages keeps serving the last deployment --- so the site
+    # silently freezes at the last green commit while the repo moves on, and
+    # the crit sweep reads a bare HTTP 200 as live. The tutor then screenshots
+    # last week's work as this week's, with nothing in the capture to say so.
+    #
+    # The crit mark already prices a red check: green at the sweep earns the
+    # full mark for that half, red or absent earns half of it. Gating the
+    # deploy adds a second, uncalibrated penalty on top --- and on a first ship
+    # it costs the whole of Mark A, because nothing has deployed, the URL 404s
+    # and the liveness floor fails.
+    #
+    # The deploy runs its own `pnpm build`, which is the gate that matters
+    # here: a site that cannot build still cannot ship. The spec walks the
+    # built `dist/` for quality, not for deployability.
+    #
     # Pages can't serve a private repo on the free org anyway; the visibility
     # condition keeps a private-phase run from failing confusingly here.
     if: ${{ !github.event.repository.private && github.ref == 'refs/heads/main' }}
