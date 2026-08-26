@@ -36,27 +36,19 @@ pnpm build           # produce dist/ (what gets deployed)
 pnpm dlx linkinator ./dist --silent --skip "^https?://(?!localhost|127)"
 ```
 
-`mise` is the course's recommended runtime manager. If you use another manager
-or the official installers, that is fine: provide the Node and pnpm versions in
-`mise.toml`, then run the same commands. Tutor support reproduces runtime
-problems with mise.
+`mise` is what tutor support reproduces runtime problems with; any other manager
+is fine if you match the Node and pnpm versions in `mise.toml`.
 
 ## What's here
 
 - `index.html`, `styles.css`, `main.ts` --- a minimal starting site. Replace it.
-- `mise.toml` --- the tested Node and pnpm versions for this template.
-- `spec/` --- what the checks are for (`README.md`) and the shipped invariants
-  (`invariants.test.ts`); the spec tests you write live alongside them.
-- `CLAUDE.md` --- orients whoever works in this repo, you or a coding agent.
-  Yours to grow.
-- `PROCESS.md` --- a template for your process overview, showing the
-  cited-moment format. Replace it with your own; `pnpm check:evidence` verifies
-  your citations resolve.
-- `.github/workflows/checks.yml` --- the CI sensors that run on every push once
-  your repo is public, and the GitHub Pages deploy.
+- `spec/` --- the shipped invariants (`invariants.test.ts`); the spec tests you
+  write live alongside them.
 - `.githooks/pre-commit` --- blocks any commit that contains something shaped
   like an API key, so your COMP4020 key can't end up in a public repo. Installed
   automatically by `pnpm install`.
+- `CLAUDE.md`, `PROCESS.md`, `spec/README.md` and `reflections/README.md` ---
+  each says what it is for, and each is yours to replace or grow.
 
 This template is SSG-agnostic: plain HTML/CSS/TypeScript on Vite, so you can add
 Astro, Eleventy, or any static generator later without changing how it deploys.

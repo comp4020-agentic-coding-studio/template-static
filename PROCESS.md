@@ -20,11 +20,9 @@ One paragraph: the thing, and the idea behind it.
 
 ## How I got here
 
-The account of the process: what the brief asked, what you tried, what didn't
-work, what you changed about how the agent was directed as a result --- a rule
-added to `CLAUDE.md`, a check written, an attempt thrown away --- and how you
-knew the result was right. Tell it in whatever order makes it clear. A weekly
-prototype needs a paragraph or two; an assignment needs more.
+The account of the process: how the work actually went, and how you knew the
+result was right. Tell it in whatever order makes it clear. A weekly prototype
+needs a paragraph or two; an assignment needs more.
 
 Cite the record as you go, as links whose text is the commit hash or range and
 whose target is this repo's commit or compare URL, so a reader clicks straight
