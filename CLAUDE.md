@@ -25,10 +25,8 @@ ship. CI runs the same plus links, secrets and the deploy.
 `spec/README.md`, `PROCESS.md` and `reflections/README.md` are in this repo and
 say what they are for.
 
-## This file is yours
+## What carries forward
 
-A starting point, not a rulebook: what you add to it is the harness, and the
-harness is assessed. This file and the sensors you wire into `check` carry
-across the course --- both come with you into next week's repo. The prototype
-doesn't: source, and the tests answering this week's published spec, stay
-behind. `spec/README.md` draws the line.
+This file and the sensors you wire into `check` come with you into next week's
+repo. The prototype doesn't: source, and the tests answering this week's
+published spec, stay behind. `spec/README.md` draws the line.

@@ -48,7 +48,7 @@ is fine if you match the Node and pnpm versions in `mise.toml`.
   like an API key, so your COMP4020 key can't end up in a public repo. Installed
   automatically by `pnpm install`.
 - `CLAUDE.md`, `PROCESS.md`, `spec/README.md` and `reflections/README.md` ---
-  each says what it is for, and each is yours to replace or grow.
+  each says what it is for.
 
 This template is SSG-agnostic: plain HTML/CSS/TypeScript on Vite, so you can add
 Astro, Eleventy, or any static generator later without changing how it deploys.
