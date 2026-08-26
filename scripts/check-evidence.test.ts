@@ -6,24 +6,24 @@ import { afterEach, describe, expect, it } from "vitest";
 import { expectedReflections } from "./check-evidence.ts";
 
 // The expected reflection names derive from the repo name alone — offline,
-// no course calendar. The final repo spans several deliverables, so any of
-// its names counts; which weeks have entries is the tutor's question.
+// no course calendar. The final repo spans three crits, so any of their names
+// counts; which weeks have entries is the tutor's question.
 describe("expectedReflections", () => {
   it("names the weekly crit's reflection from the repo prefix", () => {
     expect(expectedReflections("comp4020-crit1-alice")).toEqual(["crit-1.md"]);
     expect(expectedReflections("comp4020-crit5-alice")).toEqual(["crit-5.md"]);
   });
 
-  it("names the assignment's reflection, which the retro crit reads too", () => {
-    expect(expectedReflections("comp4020-ass1-alice")).toEqual(["assignment-1.md"]);
+  it("expects none of an assignment repo, whose account is PROCESS.md", () => {
+    expect(expectedReflections("comp4020-ass1-alice")).toEqual([]);
+    expect(expectedReflections("comp4020-ass2-alice")).toEqual([]);
   });
 
-  it("accepts any of the shared final repo's names", () => {
+  it("accepts any of the shared final repo's crit names", () => {
     expect(expectedReflections("comp4020-final-alice")).toEqual([
       "crit-8.md",
       "crit-9.md",
       "crit-10.md",
-      "final-project.md",
     ]);
   });
 
@@ -43,16 +43,20 @@ const env = {
   GIT_CONFIG_SYSTEM: "/dev/null",
 };
 
-function fixture(withClaudeMd = true, reflection = "crit-1.md"): string {
+function fixture(
+  withClaudeMd = true,
+  reflection: string | null = "crit-1.md",
+  repo = "comp4020-crit1-alice",
+): string {
   const cwd = mkdtempSync(join(tmpdir(), "check-evidence-"));
   fixtures.push(cwd);
   mkdirSync(join(cwd, "reflections"));
-  writeFileSync(join(cwd, "reflections", reflection), "# Reflection\n");
+  if (reflection) writeFileSync(join(cwd, "reflections", reflection), "# Reflection\n");
   if (withClaudeMd) writeFileSync(join(cwd, "CLAUDE.md"), "# Working method\n");
   execFileSync("git", ["init", "-q"], { cwd, env });
   execFileSync(
     "git",
-    ["remote", "add", "origin", "https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-alice.git"],
+    ["remote", "add", "origin", `https://github.com/comp4020-agentic-coding-studio/${repo}.git`],
     { cwd, env },
   );
   execFileSync(
@@ -107,6 +111,16 @@ describe("check:evidence", () => {
     });
     expect(result.status).toBe(1);
     expect(result.stderr).toContain("the marker reads reflections/crit-1.md");
+  });
+
+  it("asks nothing of an assignment repo's reflections/", () => {
+    const result = spawnSync(process.execPath, [script], {
+      cwd: fixture(true, null, "comp4020-ass1-alice"),
+      env,
+      encoding: "utf8",
+    });
+    expect(result.status, result.stderr).toBe(0);
+    expect(result.stdout).toContain("none needed");
   });
 
   it("rejects a missing CLAUDE.md", () => {

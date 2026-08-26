@@ -2,18 +2,19 @@
 // Checks the process evidence every submission carries: PROCESS.md with its
 // template boilerplate gone, every cited commit hash resolving to a real
 // commit in this repo (a citation is a markdown link whose text is an
-// abbreviated SHA or a sha...sha range), a reflection entry the marker reads,
-// and your CLAUDE.md.
+// abbreviated SHA or a sha...sha range), a crit week's reflection entry, and
+// your CLAUDE.md.
 //
 // The repo's name carries the deliverable prefix (repo = <prefix>-<handle>),
-// and the reflection is named for the deliverable, so the expected names
-// derive from the name alone, offline. The final-project repo spans several
-// deliverables; any one of its names counts here.
+// and a reflection is named for the crit it answers, so the expected names
+// derive from the name alone, offline. An assignment repo carries none: its
+// written account is PROCESS.md. The final-project repo spans three crits;
+// any one of their names counts here.
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
-const REFLECTION_NAME = /^(crit-\d+|assignment-\d+|final-project)\.md$/;
+const REFLECTION_NAME = /^crit-\d+\.md$/;
 
 // The repo's name is the one fact linking this working copy to a published
 // deliverable. In CI it's authoritative; locally it comes from origin.
@@ -35,14 +36,13 @@ export function repoName(): string | undefined {
 }
 
 /** The reflection filenames the marker reads for this repo, from its name
- *  alone; null for a repo without a course prefix. */
+ *  alone: empty for an assignment repo, which carries none, and null for a
+ *  repo without a course prefix. */
 export function expectedReflections(repo: string): string[] | null {
   const crit = repo.match(/^comp4020-crit(\d+)-/);
   if (crit) return [`crit-${Number.parseInt(crit[1], 10)}.md`];
-  const assignment = repo.match(/^comp4020-ass(\d+)-/);
-  if (assignment) return [`assignment-${assignment[1]}.md`];
-  if (repo.startsWith("comp4020-final-"))
-    return ["crit-8.md", "crit-9.md", "crit-10.md", "final-project.md"];
+  if (/^comp4020-ass\d+-/.test(repo)) return [];
+  if (repo.startsWith("comp4020-final-")) return ["crit-8.md", "crit-9.md", "crit-10.md"];
   return null;
 }
 
@@ -73,6 +73,8 @@ function main(): void {
     skip("no origin remote to name this repo — skipping the reflection check");
   } else if (!expected) {
     skip(`${repo} doesn't carry a course repo prefix — skipping the reflection check`);
+  } else if (expected.length === 0) {
+    console.log("✓ reflections/: none needed — an assignment's written account is PROCESS.md");
   } else {
     const found = expected.filter((name) => reflections.includes(name));
     if (found.length > 0) {
@@ -105,7 +107,7 @@ function main(): void {
   }
 
   if (shas.size === 0) {
-    fail("no commit citations found — cite each moment as [`<sha>`](<commit or compare URL>)");
+    fail("no commit citations found — cite the record as [`<sha>`](<commit or compare URL>)");
   }
 
   for (const sha of shas) {

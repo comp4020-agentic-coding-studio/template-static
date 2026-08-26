@@ -4,10 +4,9 @@
      in it with your own overview, and delete this comment — `pnpm
      check:evidence` will remind you if it's still here. -->
 
-A reading-guide to how the work came together --- a map to your process, not an
-essay about it. Markers read this file and follow its citations; they don't
-trawl the repo for evidence you didn't point at, so if a moment mattered, cite
-it.
+Written by you, for a reader: how you got from the brief to the harness and
+agentic workflow behind this submission. Markers read this file and follow its
+citations; they don't trawl the repo for evidence you didn't point at.
 
 This file is the shape; the course site's
 [assessment page](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#what-you-submit)
@@ -19,29 +18,17 @@ cover every deliverable.
 
 One paragraph: the thing, and the idea behind it.
 
-## The moments that mattered
+## How I got here
 
-Three or four for an assignment; fewer is fine for a weekly prototype. Keep the
-list short so each moment has room to do all four jobs:
+The account of the process: what the brief asked, what you tried, what didn't
+work, what you changed about how the agent was directed as a result --- a rule
+added to `CLAUDE.md`, a check written, an attempt thrown away --- and how you
+knew the result was right. Tell it in whatever order makes it clear. A weekly
+prototype needs a paragraph or two; an assignment needs more.
 
-1. **what happened** --- the problem, or the thing that went wrong
-2. **what you did instead of the obvious thing** --- the call you made, and why
-   it beat the obvious one
-3. **how you knew it was right** --- the check you ran, the viewport you looked
-   at, what you read before accepting the diff
-4. **the citation** --- a commit or commit range, a `CLAUDE.md` change, a check
-   that went from red to green, a prompt paired with the commit it produced
-
-Jobs 2 and 3 are the ones the repo can't tell a reader on its own, so they're
-where the marks are. The strongest moments are the ones where a correction
-landed in the **harness** --- the standards and checks your work has to satisfy
---- rather than in a retry: a rule added to `CLAUDE.md`, a check wired up, an
-attempt thrown away. Retrying until it passes is the routine case, and changing
-what the work runs against is the skilled one.
-
-Cite each moment as a link whose text is the commit hash or range and whose
-target is this repo's commit or compare URL, so a reader clicks straight to the
-evidence:
+Cite the record as you go, as links whose text is the commit hash or range and
+whose target is this repo's commit or compare URL, so a reader clicks straight
+to the evidence:
 
 - one commit: [`a1b2c3d`](https://github.com/YOUR-ORG/YOUR-REPO/commit/a1b2c3d)
 - a range:
@@ -52,19 +39,17 @@ full transcript) next to the citation:
 
 > the prompt, verbatim
 
-Screenshots are welcome where one carries the verification better than a
-sentence does. Commit the file to this repo and link it with a **relative**
-path, which is what makes it render on GitHub: `![alt text](docs/before.png)`.
-Images don't count towards the word count and don't replace the citation.
+Screenshots are welcome where one carries the point better than a sentence does.
+Commit the file to this repo and link it with a **relative** path, which is what
+makes it render on GitHub: `![alt text](docs/before.png)`. Images don't count
+towards the word count and don't replace the citation.
 
 ## Before you ship
 
-`pnpm check:evidence` verifies your citations resolve to real commits, that a
-reflection entry the marker reads is in `reflections/`, and that your
-`CLAUDE.md` is there --- before a marker ever opens the file. It checks that
-your map is traceable, not that it is good: the marker judges whether your
-small, deliberately chosen set of moments shows real judgement and reflection. A
-green check is not a substitute for that curation.
+`pnpm check:evidence` verifies that this comment is gone, that your citations
+resolve to real commits, that a crit week's reflection entry is in
+`reflections/`, and that your `CLAUDE.md` is there. It checks that your account
+is traceable, not that it is good: that is the marker's call.
 
 Images aren't checked: unlike a citation whose SHA doesn't resolve, a broken
 image is visible the moment this file is rendered on GitHub.
