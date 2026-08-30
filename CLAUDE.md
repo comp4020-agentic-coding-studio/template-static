@@ -24,9 +24,3 @@ ship. CI runs the same plus links, secrets and the deploy.
 
 `spec/README.md`, `PROCESS.md` and `reflections/README.md` are in this repo and
 say what they are for.
-
-## What carries forward
-
-This file and the sensors you wire into `check` come with you into next week's
-repo. The prototype doesn't: source, and the tests answering this week's
-published spec, stay behind. `spec/README.md` draws the line.

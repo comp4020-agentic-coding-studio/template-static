@@ -33,14 +33,6 @@ count: select the checks that protect your work's real promises, and test the
 **contracts** — what the page must do, not how you built it — so the tests
 survive a change of approach, or of stack.
 
-Two kinds end up in here, and they have different lifespans:
-
-- **contract tests** answer this week's published spec. They retire with the
-  brief they answer, so they stay behind when the week does.
-- **sensors** assert a standard you hold the agent to whatever the brief is. A
-  sensor is harness, the same as a rule in `CLAUDE.md`, so it comes with you
-  into next week's repo.
-
 A green suite here is backpressure, not a mark: your tutor verifies what you
 deployed against the published spec at the crit, and keeping your own tests
 green is how you arrive with no surprises.
