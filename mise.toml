@@ -1,4 +1,3 @@
 [tools]
-node = "24"
-# pnpm is deliberately absent: CI reads package.json's `packageManager`,
-# which is the single owner of the pnpm version. Bump it there.
+node = "24.21.0"
+pnpm = "11.9.0"
